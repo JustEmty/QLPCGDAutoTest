@@ -38,7 +38,7 @@ public class UserPage {
 	@FindBy(xpath = "//*[@id=\"tblUser_wrapper\"]/div[1]/div[1]/div[2]/div/label/div/span/span[1]/span/"
 			+ "ul/li[6]/input") private WebElement showColumns;
 	@FindBy(xpath = "//*[@id=\"tblUser\"]/tbody/tr[1]/td[7]/div/input") private WebElement userStatus;
-	@FindBy(xpath = "//*[@id=\"tblUser\"]/tbody/tr[1]/td[8]/a[2]/i") private WebElement deleteUserFormButton;
+	@FindBy(xpath = "//*[@id=\"tblUser\"]/tbody/tr[1]/td[7]/a[2]/i") private WebElement deleteUserFormButton;
 	@FindBy(xpath = "/html/body/div[3]/div/div[6]/button[1]") private WebElement confirmDeleteUserFormButton;
 	@FindBy(xpath = "/html/body/div[3]/div/div[6]/button[3]") private WebElement cancelDeleteUserFormButton;
 	
