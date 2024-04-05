@@ -4,8 +4,13 @@ import org.testng.annotations.Test;
 
 import data.DataContainer;
 import pageFactory.LoginPage;
+import pageFactory.MenuTab;
+import pageFactory.ViewLecturerTimetablePage;
 
 import org.testng.annotations.BeforeTest;
+
+import java.awt.AWTException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,39 +20,39 @@ public class ViewLecturerTimetableTestNG {
 
 	private WebDriver webDriver;
 	private LoginPage loginPage;
-
+	private MenuTab menuTab;
+	private ViewLecturerTimetablePage viewLecturerTimetableTestNG;
+	
 	@BeforeTest
-	public void setUp() throws InterruptedException {
+	public void beforeTest() throws InterruptedException {
 		System.setProperty(DataContainer.WEBDRIVER_CHROME_DRIVER, DataContainer.WEBDRIVER_CHROME_DRIVER_PATH);
-
+		
 		webDriver = new ChromeDriver();
 		loginPage = new LoginPage(webDriver);
-
+		viewLecturerTimetableTestNG = new ViewLecturerTimetablePage(webDriver);
+		menuTab = new MenuTab(webDriver);
+		
 		loginPage.loginToWebsite();
+		menuTab.moveToViewLecturerTimetablePage();
 	}
-
+	
 	@Test
-	public void TC_01() throws InterruptedException {
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[5]/a")).click();
-		Thread.sleep(1500);
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[5]/ul/li[5]/a/span")).click();
-		Thread.sleep(1500);
-
-		String ExpectTitle = "Thống kê lịch giảng dạy";
-		String ActualTitle = webDriver.getTitle().toString();
-		if (ActualTitle.contentEquals(ExpectTitle)) {
-			System.out.println("Pass");
-			System.out.println("Title mong đợi là: " + ExpectTitle);
-			System.out.println("Title thực tế là: " + ActualTitle);
-		} else {
+	public void fullAndMinimizeScreen() throws InterruptedException {
+		viewLecturerTimetableTestNG.fullAndMinimizeScreenButtonClicked();
+	}
+	
+	@Test
+	public void compareTitle() throws InterruptedException {
+		String expectedTitle = "Thống kê lịch giảng dạy";
+		String actualTitle = webDriver.getTitle();
+		
+		if(actualTitle.equals(expectedTitle)) {
+			System.out.println("PASS");
+		}else {
 			System.out.println("Fail");
-			System.out.println("Title mong đợi là: " + ExpectTitle);
-			System.out.println("Title thực tế là: " + ActualTitle);
+			System.out.println("Expected Title: " + expectedTitle);
+			System.out.println("Actual Title: " + actualTitle);
 		}
-		;
-
-		webDriver.close();
-
 	}
 
 	@AfterTest

@@ -4,21 +4,19 @@ import org.testng.annotations.Test;
 
 import data.DataContainer;
 import pageFactory.LoginPage;
+import pageFactory.TermPage;
 
 import org.testng.annotations.BeforeTest;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterTest;
 
 public class UpdateTermTestNG {
 
 	private WebDriver webDriver;
 	private LoginPage loginPage;
+	private TermPage termPage;
 
 	@BeforeTest
 	public void setUp() throws InterruptedException {
@@ -26,212 +24,60 @@ public class UpdateTermTestNG {
 
 		webDriver = new ChromeDriver();
 		loginPage = new LoginPage(webDriver);
+		termPage = new TermPage(webDriver);
 
 		loginPage.loginToWebsite();
+		termPage.chonMucHocKy();
 	}
 
-	@Test
+	@Test(priority = 1)
 	public void TestCase1() throws InterruptedException {
-		Actions actions = new Actions(webDriver);
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[2]/a/span")).click();
-		Thread.sleep(2000);
-
-		// Nhấn nút chỉnh sửa
-		webDriver.findElement(By.xpath("//*[@id=\"tblTerm\"]/tbody/tr[1]/td[9]/a[1]/i")).click();
-		Thread.sleep(2000);
-
-		// Sửa Năm bắt đầu
-		webDriver.findElement(By.xpath("//*[@id=\"select2-start_year-container\"]")).click();
-		// Nhấn nút Down và chọn phần tử đó
-		actions.sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
-
-		// Sửa Năm kết thúc
-		webDriver.findElement(By.xpath("//*[@id=\"select2-end_year-container\"]")).click();
-		// Nhấn nút Down và chọn phần tử đó
-		actions.sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
-
-		// Chuyển sang ô nhập Tuần bắt đầu
-		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-
-		// Sửa tuần bắt đầu
-		webDriver.findElement(By.xpath("//*[@id=\"start_week\"]")).sendKeys("26");
-		Thread.sleep(2000);
-
-		// Sửa ngày bắt đầu
-		webDriver.findElement(By.xpath("//*[@id=\"term-form\"]/div[5]/input[2]")).click();
-		Thread.sleep(2000);
-		// Sửa tháng
-		WebElement month = webDriver.findElement(By.xpath("/html/body/div[4]/div[1]/div/div/select"));
-		month.click();
-		Select chon_thang = new Select(month);
-		chon_thang.selectByVisibleText("Tháng tư");
-		Thread.sleep(5000);
-		// Sửa năm
-		WebElement year = webDriver.findElement(By.xpath("/html/body/div[4]/div[1]/div/div/div/input"));
-		year.click();
-		year.sendKeys("2025");
-		Thread.sleep(5000);
-		// Sửa ngày
-		webDriver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/span[12]")).click();
-		Thread.sleep(2000);
-
-		// Chuyển sang ô nhập Tiết tối đa
-		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-
-		// Sửa tiết tối đa
-		webDriver.findElement(By.xpath("//*[@id=\"max_lesson\"]")).sendKeys("7");
-		Thread.sleep(2000);
-
-		// Chuyển sang ô nhập Lớp tối đa
-		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-
-		// Sửa lớp tối đa
-		webDriver.findElement(By.xpath("//*[@id=\"max_class\"]")).sendKeys("15");
-		Thread.sleep(2000);
-
-		// Nhấn nút Lưu
-		webDriver.findElement(By.xpath("//*[@id=\"term-form\"]/div[7]/button[2]")).click();
+		termPage.suaHocKy("26", "2025", "7", "15");
+		String thongBaoThanhCongExpect = "Cập nhật thành công!";
+		String thongBaoThanhCongActual = webDriver.findElement(By.className("toast-message")).getText();
+		if (thongBaoThanhCongActual.contentEquals(thongBaoThanhCongExpect)) {
+			System.out.println("Pass");
+			System.out.println("Thông báo cập nhật học kỳ thành công theo mong đợi là: " + thongBaoThanhCongExpect);
+			System.out.println("Thông báo cập nhật học kỳ thành công theo thực tế là: " + thongBaoThanhCongActual);
+		} else {
+			System.out.println("Fail");
+			System.out.println("Thông báo cập nhật học kỳ thành công theo mong đợi là: " + thongBaoThanhCongExpect);
+			System.out.println("Thông báo cập nhật học kỳ thành công theo thực tế là: " + thongBaoThanhCongActual);
+		}
 	}
 
-	@Test
+	@Test(priority = 2)
 	public void TestCase2() throws InterruptedException {
-		Actions actions = new Actions(webDriver);
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[2]/a/span")).click();
-		Thread.sleep(2000);
-
-		// Nhấn nút chỉnh sửa
-		webDriver.findElement(By.xpath("//*[@id=\"tblTerm\"]/tbody/tr[1]/td[9]/a[1]/i")).click();
-		Thread.sleep(2000);
-
-		// Sửa Năm bắt đầu
-		webDriver.findElement(By.xpath("//*[@id=\"select2-start_year-container\"]")).click();
-		// Nhấn nút Down và chọn phần tử đó
-		actions.sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
-
-		// Sửa Năm kết thúc
-		webDriver.findElement(By.xpath("//*[@id=\"select2-end_year-container\"]")).click();
-		// Nhấn nút Down và chọn phần tử đó
-		actions.sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
-
-		// Chuyển sang ô nhập Tuần bắt đầu
-		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-
-		// Sửa tuần bắt đầu
-		webDriver.findElement(By.xpath("//*[@id=\"start_week\"]")).sendKeys("26");
-		Thread.sleep(2000);
-
-		// Sửa ngày bắt đầu
-		webDriver.findElement(By.xpath("//*[@id=\"term-form\"]/div[5]/input[2]")).click();
-		Thread.sleep(2000);
-		// Sửa tháng
-		WebElement month = webDriver.findElement(By.xpath("/html/body/div[4]/div[1]/div/div/select"));
-		month.click();
-		Select chon_thang = new Select(month);
-		chon_thang.selectByVisibleText("Tháng tư");
-		Thread.sleep(5000);
-		// Sửa năm
-		WebElement year = webDriver.findElement(By.xpath("/html/body/div[4]/div[1]/div/div/div/input"));
-		year.click();
-		year.sendKeys("2025");
-		Thread.sleep(5000);
-		// Sửa ngày
-		webDriver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/span[12]")).click();
-		Thread.sleep(2000);
-
-		// Chuyển sang ô nhập Tiết tối đa
-		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-
-		// Sửa tiết tối đa
-		webDriver.findElement(By.xpath("//*[@id=\"max_lesson\"]")).sendKeys("7");
-		Thread.sleep(2000);
-
-		// Chuyển sang ô nhập Lớp tối đa
-		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-
-		// Sửa lớp tối đa
-		webDriver.findElement(By.xpath("//*[@id=\"max_class\"]")).sendKeys("15");
-		Thread.sleep(2000);
-
-		// Nhấn nút Hủy
-		webDriver.findElement(By.xpath("//*[@id=\"btnClose\"]")).click();
-	}
-
-	@Test
-	public void TestCase3() throws InterruptedException {
-		Actions actions = new Actions(webDriver);
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[2]/a/span")).click();
-		Thread.sleep(2000);
-
-		// Nhấn nút chỉnh sửa
-		webDriver.findElement(By.xpath("//*[@id=\"tblTerm\"]/tbody/tr[1]/td[9]/a[1]/i")).click();
-		Thread.sleep(2000);
-
-		// Sửa Năm bắt đầu
-		webDriver.findElement(By.xpath("//*[@id=\"select2-start_year-container\"]")).click();
-		// Nhấn nút Down và chọn phần tử đó
-		actions.sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
-
-		// Sửa Năm kết thúc
-		webDriver.findElement(By.xpath("//*[@id=\"select2-end_year-container\"]")).click();
-		// Nhấn nút Down và chọn phần tử đó
-		actions.sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
-
-		// Chuyển sang ô nhập Tuần bắt đầu
-		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-
-		// Sửa tuần bắt đầu
-		webDriver.findElement(By.xpath("//*[@id=\"start_week\"]")).sendKeys("53");
-		Thread.sleep(2000);
-
-		// Sửa ngày bắt đầu
-		webDriver.findElement(By.xpath("//*[@id=\"term-form\"]/div[5]/input[2]")).click();
-		Thread.sleep(2000);
-		// Sửa tháng
-		WebElement month = webDriver.findElement(By.xpath("/html/body/div[4]/div[1]/div/div/select"));
-		month.click();
-		Select chon_thang = new Select(month);
-		chon_thang.selectByVisibleText("Tháng tư");
-		Thread.sleep(5000);
-		// Sửa năm
-		WebElement year = webDriver.findElement(By.xpath("/html/body/div[4]/div[1]/div/div/div/input"));
-		year.click();
-		year.sendKeys("2025");
-		Thread.sleep(5000);
-		// Sửa ngày
-		webDriver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/span[12]")).click();
-		Thread.sleep(2000);
-
-		// Chuyển sang ô nhập Tiết tối đa
-		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-
-		// Sửa tiết tối đa
-		webDriver.findElement(By.xpath("//*[@id=\"max_lesson\"]")).sendKeys("16");
-		Thread.sleep(2000);
-
-		// Chuyển sang ô nhập Lớp tối đa
-		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-
-		// Sửa lớp tối đa
-		webDriver.findElement(By.xpath("//*[@id=\"max_class\"]")).sendKeys("31");
-		Thread.sleep(2000);
-
-		// Nhấn nút Lưu
-		webDriver.findElement(By.xpath("//*[@id=\"term-form\"]/div[7]/button[2]")).click();
+		termPage.suaHocKy(null, null, null, null);
+		String tuanBDErrorExpect = "Bạn chưa nhập tuần bắt đầu";
+		String tietTDErrorExpect = "Bạn chưa nhập số tiết tối đa";
+		String lopTDErrorExpect = "Bạn chưa nhập số lớp tối đa";
+		String tuanBDErrorActual = webDriver.findElement(By.xpath("//*[@id=\"start_week-error\"]")).getText();
+		String tietTDErrorActual = webDriver.findElement(By.xpath("//*[@id=\"max_lesson-error\"]")).getText();
+		String lopTDErrorActual = webDriver.findElement(By.xpath("//*[@id=\"max_class-error\"]")).getText();
+		if (tuanBDErrorActual.contentEquals(tuanBDErrorActual) && tietTDErrorActual.contentEquals(tietTDErrorExpect)
+				&& lopTDErrorActual.contentEquals(lopTDErrorExpect)) {
+			System.out.println("Pass");
+			System.out.println("Thông báo lỗi của trường nhập tuần bắt đầu mong đợi là: " + tuanBDErrorExpect);
+			System.out.println("Thông báo lỗi của trường nhập tuần bắt đầu thực tế là: " + tuanBDErrorActual);
+			System.out.println("---------------------------------------");
+			System.out.println("Thông báo lỗi của trường nhập tiết tối đa mong đợi là: " + tietTDErrorExpect);
+			System.out.println("Thông báo lỗi của trường nhập tiết tối đa thực tế là: " + tietTDErrorActual);
+			System.out.println("---------------------------------------");
+			System.out.println("Thông báo lỗi của trường nhập lớp tối đa mong đợi là: " + lopTDErrorExpect);
+			System.out.println("Thông báo lỗi của trường nhập lớp tối đa thực tế là: " + lopTDErrorActual);
+		} else {
+			System.out.println("Fail");
+			System.out.println("Thông báo lỗi của trường nhập tuần bắt đầu mong đợi là: " + tuanBDErrorExpect);
+			System.out.println("Thông báo lỗi của trường nhập tuần bắt đầu thực tế là: " + tuanBDErrorActual);
+			System.out.println("---------------------------------------");
+			System.out.println("Thông báo lỗi của trường nhập tiết tối đa mong đợi là: " + tietTDErrorExpect);
+			System.out.println("Thông báo lỗi của trường nhập tiết tối đa thực tế là: " + tietTDErrorActual);
+			System.out.println("---------------------------------------");
+			System.out.println("Thông báo lỗi của trường nhập lớp tối đa mong đợi là: " + lopTDErrorExpect);
+			System.out.println("Thông báo lỗi của trường nhập lớp tối đa thực tế là: " + lopTDErrorActual);
+		}
+		;
 	}
 
 	@AfterTest

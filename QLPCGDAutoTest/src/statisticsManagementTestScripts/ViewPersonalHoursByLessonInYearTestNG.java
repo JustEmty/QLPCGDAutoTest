@@ -4,8 +4,15 @@ import org.testng.annotations.Test;
 
 import data.DataContainer;
 import pageFactory.LoginPage;
+import pageFactory.MenuTab;
+import pageFactory.ViewPersonalHoursByLessonPage;
 
 import org.testng.annotations.BeforeTest;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -19,155 +26,50 @@ public class ViewPersonalHoursByLessonInYearTestNG {
 
 	private WebDriver webDriver;
 	private LoginPage loginPage;
-
+	private MenuTab menuTab;
+	private ViewPersonalHoursByLessonPage viewPersonalHoursByLessonPage;
+	private Robot robot;
+	
 	@BeforeTest
-	public void setUp() throws InterruptedException {
+	public void beforeTest() throws InterruptedException, AWTException {
 		System.setProperty(DataContainer.WEBDRIVER_CHROME_DRIVER, DataContainer.WEBDRIVER_CHROME_DRIVER_PATH);
-
+		
 		webDriver = new ChromeDriver();
 		loginPage = new LoginPage(webDriver);
-
+		viewPersonalHoursByLessonPage = new ViewPersonalHoursByLessonPage(webDriver);
+		menuTab = new MenuTab(webDriver);
+		robot = new Robot();
+		
 		loginPage.loginToWebsite();
+		menuTab.moveToViewPersonalHoursByLessonInTermTab();
+		viewPersonalHoursByLessonPage.setYear();
 	}
-
+	
 	@Test
-	public void TC_01() throws InterruptedException {
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[5]/a")).click();
-		Thread.sleep(1500);
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[5]/ul/li[4]/a/span")).click();
-		Thread.sleep(1500);
-
-		webDriver.findElement(By.xpath("//*[@id=\"select2-unit-container\"]")).click();
-		Thread.sleep(1500);
-		Actions layThongKe = new Actions(webDriver);
-		layThongKe.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
+	public void fullAndMinimizeScreen() throws InterruptedException {
+		viewPersonalHoursByLessonPage.fullAndMinimizeScreenButtonClicked();
+	}
+	
+	@Test
+	public void scrollUpAndDownPage() throws InterruptedException {
+		robot.keyPress(KeyEvent.VK_PAGE_DOWN);
 		Thread.sleep(2000);
-
-		webDriver.findElement(By.xpath("//*[@id=\"select2-year-container\"]")).click();
-		Thread.sleep(1500);
-		Actions layNamHoc = new Actions(webDriver);
-		layNamHoc.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN)
-				.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER)
-				.perform();
+		robot.keyPress(KeyEvent.VK_PAGE_UP);
 		Thread.sleep(2000);
-
-		webDriver.findElement(By.xpath("//*[@id=\"isLesson\"]")).click();
-		Thread.sleep(1500);
-
-		String ExpectTitle = "Thống kê số giờ cá nhân";
-		String ActualTitle = webDriver.getTitle().toString();
-		if (ActualTitle.contentEquals(ExpectTitle)) {
-			System.out.println("Pass");
-			System.out.println("Title mong đợi là: " + ExpectTitle);
-			System.out.println("Title thực tế là: " + ActualTitle);
-		} else {
+	}
+	
+	@Test
+	public void compareTitle() throws InterruptedException {
+		String expectedTitle = "Thống kê số giờ cá nhân";
+		String actualTitle = webDriver.getTitle();
+		
+		if(actualTitle.equals(expectedTitle)) {
+			System.out.println("PASS");
+		}else {
 			System.out.println("Fail");
-			System.out.println("Title mong đợi là: " + ExpectTitle);
-			System.out.println("Title thực tế là: " + ActualTitle);
+			System.out.println("Expected Title: " + expectedTitle);
+			System.out.println("Actual Title: " + actualTitle);
 		}
-		;
-
-		Thread.sleep(2000);
-	}
-
-	@Test
-	public void TC_02() throws InterruptedException {
-		webDriver.navigate().refresh();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"select2-unit-container\"]")).click();
-		Thread.sleep(1500);
-		Actions layThongKe = new Actions(webDriver);
-		layThongKe.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
-
-		webDriver.findElement(By.xpath("//*[@id=\"select2-year-container\"]")).click();
-		Thread.sleep(1500);
-		Actions layNamHoc = new Actions(webDriver);
-		layNamHoc.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN)
-				.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER)
-				.perform();
-		Thread.sleep(2000);
-
-		webDriver.findElement(By.xpath("//*[@id=\"isLesson\"]")).click();
-		Thread.sleep(1500);
-
-		JavascriptExecutor js = (JavascriptExecutor) webDriver;
-		js.executeScript("window.scrollBy(0, 1000)", "");
-		Thread.sleep(2000);
-		js.executeScript("window.scrollBy(0, -1000)", "");
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("/html/body/div[2]/nav/div/div/ul[2]/li/a/i")).click();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("/html/body/div[2]/nav/div/div/ul[2]/li/a/i")).click();
-		Thread.sleep(2000);
-	}
-
-	@Test
-	public void TC_03() throws InterruptedException {
-		webDriver.navigate().refresh();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"select2-unit-container\"]")).click();
-		Thread.sleep(1500);
-		Actions layThongKe = new Actions(webDriver);
-		layThongKe.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
-
-		webDriver.findElement(By.xpath("//*[@id=\"select2-year-container\"]")).click();
-		Thread.sleep(1500);
-		Actions layNamHoc = new Actions(webDriver);
-		layNamHoc.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN)
-				.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER)
-				.perform();
-		Thread.sleep(2000);
-
-		webDriver.findElement(By.xpath("//*[@id=\"isLesson\"]")).click();
-		Thread.sleep(1500);
-		webDriver.findElement(By.xpath("//*[@id=\"table-tab\"]")).click();
-		Thread.sleep(1500);
-		JavascriptExecutor js = (JavascriptExecutor) webDriver;
-		js.executeScript("window.scrollBy(0, 1000)", "");
-		Thread.sleep(2000);
-		js.executeScript("window.scrollBy(0, -1000)", "");
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("/html/body/div[2]/nav/div/div/ul[2]/li/a/i")).click();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("/html/body/div[2]/nav/div/div/ul[2]/li/a/i")).click();
-		Thread.sleep(2000);
-	}
-
-	@Test
-	public void TC_04() throws InterruptedException {
-		webDriver.navigate().refresh();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"select2-unit-container\"]")).click();
-		Thread.sleep(1500);
-		Actions layThongKe = new Actions(webDriver);
-		layThongKe.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
-
-		webDriver.findElement(By.xpath("//*[@id=\"select2-year-container\"]")).click();
-		Thread.sleep(1500);
-		Actions layNamHoc = new Actions(webDriver);
-		layNamHoc.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN)
-				.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER)
-				.perform();
-		Thread.sleep(2000);
-
-		webDriver.findElement(By.xpath("//*[@id=\"isLesson\"]")).click();
-		Thread.sleep(1500);
-		webDriver.findElement(By.xpath("//*[@id=\"table-tab\"]")).click();
-		Thread.sleep(1500);
-
-		System.out.println("Dữ liệu hiển thị là: ");
-		for (int i = 1; i <= 3; i++) {
-			for (int j = 1; j <= 13; j++) {
-				WebElement dulieu = webDriver
-						.findElement(By.xpath("//*[@id=\"tblStatistics\"]/tbody/tr[" + i + "]/td[" + j + "]"));
-				System.out.print(dulieu.getText() + " | ");
-			}
-			System.out.println();
-		}
-		webDriver.close();
 	}
 
 	@AfterTest

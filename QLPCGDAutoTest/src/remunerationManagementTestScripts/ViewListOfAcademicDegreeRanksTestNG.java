@@ -3,9 +3,16 @@ package remunerationManagementTestScripts;
 import org.testng.annotations.Test;
 
 import data.DataContainer;
+import pageFactory.AcademicDegreesRankPage;
 import pageFactory.LoginPage;
+import pageFactory.MenuTab;
 
 import org.testng.annotations.BeforeTest;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -18,84 +25,49 @@ public class ViewListOfAcademicDegreeRanksTestNG {
 
 	private WebDriver webDriver;
 	private LoginPage loginPage;
-
+	private MenuTab menuTab;
+	private AcademicDegreesRankPage academicDegreesRankPage;
+	private Robot robot;
+	
 	@BeforeTest
-	public void setUp() throws InterruptedException {
+	public void setUp() throws InterruptedException, AWTException {
 		System.setProperty(DataContainer.WEBDRIVER_CHROME_DRIVER, DataContainer.WEBDRIVER_CHROME_DRIVER_PATH);
 
 		webDriver = new ChromeDriver();
 		loginPage = new LoginPage(webDriver);
-
+		menuTab = new MenuTab(webDriver);
+		academicDegreesRankPage = new AcademicDegreesRankPage(webDriver);
+		robot = new Robot();
+			
 		loginPage.loginToWebsite();
+		menuTab.moveToAcademicDegreesRankTabs();
 	}
 
 	@Test
-	public void TC_01() throws InterruptedException {
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[6]/a/span")).click();
-		Thread.sleep(1500);
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[6]/ul/li[1]/a/span")).click();
-		Thread.sleep(1500);
-		webDriver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div/section/div/div/div/div[2]/ul/li[2]/a"))
-				.click();
-		Thread.sleep(1500);
-
-		String ExpectTitle = "Quản lý cấp bậc";
-		String ActualTitle = webDriver.getTitle().toString();
-		if (ActualTitle.contentEquals(ExpectTitle)) {
-			System.out.println("Pass");
-			System.out.println("Title mong đợi là: " + ExpectTitle);
-			System.out.println("Title thực tế là: " + ActualTitle);
-		} else {
+	public void fullAndMinimizeScreen() throws InterruptedException {
+		academicDegreesRankPage.fullAndMinimizeScreenButtonClicked();
+	}
+	
+	@Test
+	public void scrollUpAndDownPage() throws InterruptedException {
+		robot.keyPress(KeyEvent.VK_PAGE_DOWN);
+		Thread.sleep(2000);
+		robot.keyPress(KeyEvent.VK_PAGE_UP);
+		Thread.sleep(2000);
+	}
+	
+	@Test
+	public void compareTitle() throws InterruptedException {
+		String expectedTitle = "Quản lý cấp bậc";
+		String actualTitle = webDriver.getTitle();
+		
+		if(actualTitle.equals(expectedTitle)) {
+			System.out.println("PASS");
+		}else {
 			System.out.println("Fail");
-			System.out.println("Title mong đợi là: " + ExpectTitle);
-			System.out.println("Title thực tế là: " + ActualTitle);
+			System.out.println("Expected Title: " + expectedTitle);
+			System.out.println("Actual Title: " + actualTitle);
 		}
-		;
-
-		Thread.sleep(1500);
-
-	}
-
-	@Test
-	public void TC_02() throws InterruptedException {
-		webDriver.navigate().refresh();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"tblAcademicDegreeRank_length\"]/label/select")).click();
-		Thread.sleep(2000);
-
-		Actions actions = new Actions(webDriver);
-		actions.sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
-		JavascriptExecutor js = (JavascriptExecutor) webDriver;
-		js.executeScript("window.scrollBy(0, 1000)", "");
-		Thread.sleep(2000);
-		js.executeScript("window.scrollBy(0, -1000)", "");
-		Thread.sleep(2000);
-	}
-
-	@Test
-	public void TC_03() throws InterruptedException {
-		webDriver.navigate().refresh();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"tblAcademicDegreeRank_length\"]/label/select")).click();
-		Thread.sleep(2000);
-
-		Actions actions = new Actions(webDriver);
-		actions.sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
-		JavascriptExecutor js = (JavascriptExecutor) webDriver;
-		js.executeScript("window.scrollBy(0, 30000)", "");
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("/html/body/div[2]/button/i")).click();
-	}
-
-	@Test
-	public void TC_04() throws InterruptedException {
-		webDriver.navigate().refresh();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("/html/body/div[2]/nav/div/div/ul[2]/li/a/i")).click();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("/html/body/div[2]/nav/div/div/ul[2]/li/a/i")).click();
-
-		webDriver.close();
 	}
 
 	@AfterTest

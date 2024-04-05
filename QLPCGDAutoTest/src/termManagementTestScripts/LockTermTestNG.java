@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import data.DataContainer;
 import pageFactory.LoginPage;
+import pageFactory.TermPage;
 
 import org.testng.annotations.BeforeTest;
 import org.openqa.selenium.By;
@@ -15,6 +16,7 @@ public class LockTermTestNG {
 
 	private WebDriver webDriver;
 	private LoginPage loginPage;
+	private TermPage termPage;
 
 	@BeforeTest
 	public void setUp() throws InterruptedException {
@@ -22,20 +24,28 @@ public class LockTermTestNG {
 
 		webDriver = new ChromeDriver();
 		loginPage = new LoginPage(webDriver);
+		termPage = new TermPage(webDriver);
 
 		loginPage.loginToWebsite();
+		termPage.chonMucHocKy();
 	}
 
 	@Test
-	public void TestCase1() throws InterruptedException {
-		// Chọn mục Học Kỳ và Ngành
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[2]/a/span")).click();
-		Thread.sleep(2000);
-
-		// Nhấn nút khóa học kỳ
-		webDriver.findElement(By.xpath("//*[@id=\"tblTerm\"]/tbody/tr[1]/td[8]/div/input")).click();
-		Thread.sleep(2000);
-	}
+	  public void TestCase1() throws InterruptedException{
+		  termPage.khoaHocKy();
+		  String thongBaoThanhCongExpect = "Cập nhật trạng thái thành công!";
+		  String thongBaoThanhCongActual = webDriver.findElement(By.className("toast-message")).getText();
+		  if(thongBaoThanhCongActual.contentEquals(thongBaoThanhCongExpect)){
+			  System.out.println("Pass");
+			  System.out.println("Thông báo khóa học kỳ thành công theo mong đợi là: " + thongBaoThanhCongExpect);
+			  System.out.println("Thông báo khóa học kỳ thành công theo thực tế là: " + thongBaoThanhCongActual);
+		  }
+		  else {
+			  System.out.println("Fail");
+			  System.out.println("Thông báo khóa học kỳ thành công theo mong đợi là: " + thongBaoThanhCongExpect);
+			  System.out.println("Thông báo khóa học kỳ thành công theo thực tế là: " + thongBaoThanhCongActual);
+		}
+	  }
 
 	@AfterTest
 	public void afterTest() {

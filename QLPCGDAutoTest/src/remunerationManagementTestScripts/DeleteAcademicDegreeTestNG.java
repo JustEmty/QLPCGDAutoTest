@@ -3,10 +3,11 @@ package remunerationManagementTestScripts;
 import org.testng.annotations.Test;
 
 import data.DataContainer;
+import pageFactory.AcademicDegreesPage;
 import pageFactory.LoginPage;
+import pageFactory.MenuTab;
 
 import org.testng.annotations.BeforeTest;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
@@ -15,6 +16,8 @@ public class DeleteAcademicDegreeTestNG {
 
 	private WebDriver webDriver;
 	private LoginPage loginPage;
+	private MenuTab menuTab;
+	private AcademicDegreesPage academicDegreesPage;
 
 	@BeforeTest
 	public void setUp() throws InterruptedException {
@@ -22,33 +25,26 @@ public class DeleteAcademicDegreeTestNG {
 
 		webDriver = new ChromeDriver();
 		loginPage = new LoginPage(webDriver);
+		menuTab = new MenuTab(webDriver);
+		academicDegreesPage = new AcademicDegreesPage(webDriver);
+		
 
 		loginPage.loginToWebsite();
+		menuTab.moveToAcademicDegreesTabs();
 	}
-
+	
 	@Test
-	public void TC_01() throws InterruptedException {
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[6]/a/span")).click();
-		Thread.sleep(1500);
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[6]/ul/li[1]/a/span")).click();
-		Thread.sleep(1500);
-
-		webDriver.findElement(By.xpath("//*[@id=\"tblAcademicDegree\"]/tbody/tr[1]/td[5]/a[2]/i")).click();
-		Thread.sleep(1500);
-		webDriver.findElement(By.xpath("/html/body/div[3]/div/div[6]/button[1]")).click();
-		Thread.sleep(1500);
+	private void deleteAcademicDegreeRankFailed() throws InterruptedException {
+		academicDegreesPage.deleteAcademicDegreesPressed();
+		academicDegreesPage.cancelDeleteAcademicDegreesPressed();
+		System.out.println("Xóa không thành công!");
 	}
-
+	
 	@Test
-	public void TC_02() throws InterruptedException {
-		webDriver.navigate().refresh();
-		Thread.sleep(1500);
-
-		webDriver.findElement(By.xpath("//*[@id=\"tblAcademicDegree\"]/tbody/tr[1]/td[5]/a[2]/i")).click();
-		Thread.sleep(1500);
-		webDriver.findElement(By.xpath("/html/body/div[3]/div/div[6]/button[3]")).click();
-
-		webDriver.close();
+	private void deleteAcademicDegreeRankSucceed() throws InterruptedException {
+		academicDegreesPage.deleteAcademicDegreesPressed();
+		academicDegreesPage.confirmDeleteAcademicDegreesPressed();
+		System.out.println("Xóa thành công!");
 	}
 
 	@AfterTest

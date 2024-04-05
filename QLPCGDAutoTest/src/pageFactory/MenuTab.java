@@ -23,6 +23,11 @@ public class MenuTab {
 	@FindBy(xpath = "//*[@id=\"main-menu-navigation\"]/li[5]/ul/li[2]/a") private WebElement hoursByRemunerationCoefficientTab;
 	@FindBy(xpath = "//*[@id=\"main-menu-navigation\"]/li[5]/ul/li[3]/a") private WebElement viewVisitingLecturerStatisticsTab;
 	@FindBy(xpath = "//*[@id=\"main-menu-navigation\"]/li[5]/ul/li[4]/a") private WebElement viewPersonalHoursInTermTab;
+	@FindBy(xpath = "//*[@id=\"isLesson\"]") private WebElement viewPersonalHoursByLessonInTermTab;
+	@FindBy(xpath = "//*[@id=\"main-menu-navigation\"]/li[5]/ul/li[5]/a/span") private WebElement viewLecturerTimetablePage;
+	@FindBy(xpath = "//*[@id=\"main-menu-navigation\"]/li[6]/a/span") private WebElement remunerationTabs;
+	@FindBy(xpath = "//*[@id=\"main-menu-navigation\"]/li[6]/ul/li[1]/a/span") private WebElement academicDegreesTabs;
+	@FindBy(xpath = "/html/body/div[2]/div[2]/div[3]/div/section/div/div/div/div[2]/ul/li[2]/a") private WebElement academicDegreesRankTabs;
 	
 	
 	public MenuTab(WebDriver webDriver) {
@@ -81,6 +86,42 @@ public class MenuTab {
 	
 	public void moveToUserTab() throws InterruptedException {
 		userTab.click();
+		Thread.sleep(2000);
+	}
+	
+	public void moveToViewPersonalHoursByLessonInTermTab() throws InterruptedException {
+		moveToStatisticsTab();
+		
+		actions.click(viewPersonalHoursInTermTab).perform();
+		actions.click(viewPersonalHoursByLessonInTermTab).perform();
+		Thread.sleep(2000);
+	}
+	
+	public void moveToViewLecturerTimetablePage() throws InterruptedException {
+		moveToStatisticsTab();
+		
+		actions.click(viewLecturerTimetablePage).perform();
+		Thread.sleep(2000);
+	}
+	
+	public void moveToRemunerationTabs() throws InterruptedException {
+		remunerationTabs.click();
+		Thread.sleep(2000);
+	}
+	
+	public void moveToAcademicDegreesTabs() throws InterruptedException{
+		moveToRemunerationTabs();
+		
+		academicDegreesTabs.click();
+		Thread.sleep(2000);
+	}
+	
+	public void moveToAcademicDegreesRankTabs() throws InterruptedException{
+		moveToRemunerationTabs();
+		
+		academicDegreesTabs.click();
+		Thread.sleep(2000);
+		academicDegreesRankTabs.click();
 		Thread.sleep(2000);
 	}
 }

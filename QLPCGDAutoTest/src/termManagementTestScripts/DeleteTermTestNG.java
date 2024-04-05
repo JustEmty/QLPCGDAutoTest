@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import data.DataContainer;
 import pageFactory.LoginPage;
+import pageFactory.TermPage;
 
 import org.testng.annotations.BeforeTest;
 
@@ -16,10 +17,9 @@ import org.testng.annotations.AfterTest;
 
 public class DeleteTermTestNG {
 
-	// ERROR!!!!
-
 	private WebDriver webDriver;
 	private LoginPage loginPage;
+	private TermPage termPage;
 
 	@BeforeTest
 	public void setUp() throws InterruptedException {
@@ -27,37 +27,32 @@ public class DeleteTermTestNG {
 
 		webDriver = new ChromeDriver();
 		loginPage = new LoginPage(webDriver);
+		termPage = new TermPage(webDriver);
 
 		loginPage.loginToWebsite();
+		termPage.chonMucHocKy();
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	}
 
-	@Test
+	@Test(priority = 1)
 	public void TestCase1() throws InterruptedException {
-		// Chọn mục Học Kỳ và Ngành
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[2]/a/span")).click();
-		Thread.sleep(2000);
-
-		// Nhấn nút xóa học kỳ
-		webDriver.findElement(By.xpath("//*[@id=\"tblTerm\"]/tbody/tr[1]/td[9]/a[2]")).click();
-		Thread.sleep(2000);
-
-		// Nhấn xóa
-		webDriver.findElement(By.xpath("/html/body/div[3]/div/div[6]/button[1]")).click();
+		termPage.xoaHocKy();
+		String thongBaoThanhCongExpect = "Xóa thành công!";
+		String thongBaoThanhCongActual = webDriver.findElement(By.className("toast-message")).getText();
+		if (thongBaoThanhCongActual.contentEquals(thongBaoThanhCongExpect)) {
+			System.out.println("Pass");
+			System.out.println("Thông báo xóa học kỳ thành công theo mong đợi là: " + thongBaoThanhCongExpect);
+			System.out.println("Thông báo xóa học kỳ thành công theo thực tế là: " + thongBaoThanhCongActual);
+		} else {
+			System.out.println("Fail");
+			System.out.println("Thông báo xóa học kỳ thành công theo mong đợi là: " + thongBaoThanhCongExpect);
+			System.out.println("Thông báo xóa học kỳ thành công theo thực tế là: " + thongBaoThanhCongActual);
+		}
 	}
 
-	@Test
+	@Test(priority = 2)
 	public void TestCase2() throws InterruptedException {
-		webDriver.navigate().refresh();
-		Thread.sleep(2000);
-
-		// Nhấn nút xóa học kỳ
-		webDriver.findElement(By.xpath("//*[@id=\"tblTerm\"]/tbody/tr[1]/td[9]/a[2]")).click();
-		Thread.sleep(2000);
-
-		// Nhấn hủy
-		webDriver.findElement(By.xpath("/html/body/div[3]/div/div[6]/button[3]")).click();
-
+		termPage.huyXoaHocKy();
 	}
 
 	@AfterTest
