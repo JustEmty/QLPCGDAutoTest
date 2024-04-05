@@ -2,24 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-04-03T18:15:40 ICT" name="Default suite" finished-at="2024-04-03T18:16:00 ICT" duration-ms="20720">
+  <suite started-at="2024-04-05T12:44:12 ICT" name="Default suite" finished-at="2024-04-05T12:44:40 ICT" duration-ms="27674">
     <groups>
     </groups>
-    <test started-at="2024-04-03T18:15:40 ICT" name="Default test" finished-at="2024-04-03T18:16:00 ICT" duration-ms="20720">
-      <class name="userManagementTestScripts.LockUserTestNG">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:userManagementTestScripts.LockUserTestNG@2767e23c]" started-at="2024-04-03T18:15:40 ICT" name="setUp" finished-at="2024-04-03T18:15:54 ICT" duration-ms="14240" status="PASS">
+    <test started-at="2024-04-05T12:44:12 ICT" name="Default test" finished-at="2024-04-05T12:44:40 ICT" duration-ms="27674">
+      <class name="majorManagementTestScripts.AddMajorTestNG">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:majorManagementTestScripts.AddMajorTestNG@2767e23c]" started-at="2024-04-05T12:44:12 ICT" name="beforeClass" finished-at="2024-04-05T12:44:22 ICT" duration-ms="10351" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="test()[pri:0, instance:userManagementTestScripts.LockUserTestNG@2767e23c]" started-at="2024-04-03T18:15:54 ICT" name="test" finished-at="2024-04-03T18:16:00 ICT" duration-ms="6299" status="PASS">
+        </test-method> <!-- beforeClass -->
+        <test-method signature="addMajorWithSpecialCharacterFailed()[pri:3, instance:majorManagementTestScripts.AddMajorTestNG@2767e23c]" started-at="2024-04-05T12:44:22 ICT" name="addMajorWithSpecialCharacterFailed" finished-at="2024-04-05T12:44:39 ICT" duration-ms="16975" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- test -->
-        <test-method is-config="true" signature="afterTest()[pri:0, instance:userManagementTestScripts.LockUserTestNG@2767e23c]" started-at="2024-04-03T18:16:00 ICT" name="afterTest" finished-at="2024-04-03T18:16:00 ICT" duration-ms="151" status="PASS">
+        </test-method> <!-- addMajorWithSpecialCharacterFailed -->
+        <test-method is-config="true" signature="afterClass()[pri:0, instance:majorManagementTestScripts.AddMajorTestNG@2767e23c]" started-at="2024-04-05T12:44:39 ICT" name="afterClass" finished-at="2024-04-05T12:44:40 ICT" duration-ms="297" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- afterTest -->
-      </class> <!-- userManagementTestScripts.LockUserTestNG -->
+        </test-method> <!-- afterClass -->
+      </class> <!-- majorManagementTestScripts.AddMajorTestNG -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

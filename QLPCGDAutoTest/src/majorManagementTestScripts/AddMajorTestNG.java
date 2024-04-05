@@ -1,14 +1,12 @@
 package majorManagementTestScripts;
 
-import org.testng.annotations.Test;
-
 import data.DataContainer;
 import pageFactory.LoginPage;
 import pageFactory.TermAndMajorPage;
 import pageFactory.TermAndMajorPage.CTDT;
-import pageFactory.MenuTab;
 
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
@@ -30,22 +28,9 @@ public class AddMajorTestNG {
 		loginPage.loginToWebsite();
 		termAndMajor.moveToMajorTab();
 	}
-	
   
-	@Test
-	public void test() throws InterruptedException {
-		addMajorSucceed();
-		addMajorWithoutDataFailed();
-		addMajorWithSpecialCharacterFailed();
-		addMajorWithoutCTDTFailed();
-	}
-
-	@AfterClass
-	public void afterClass() {
-		webDriver.quit();
-	}
-  
-	private void addMajorSucceed() throws InterruptedException {
+	@Test(priority = 1)
+	public void addMajorSucceed() throws InterruptedException {
 		String majorId = "a";
 		String majorName = "a";
 		String abbreviation = "a";
@@ -57,7 +42,8 @@ public class AddMajorTestNG {
 		System.out.println("Lưu thành công");
 	}
 
-	private void addMajorWithoutDataFailed() throws InterruptedException {
+	@Test(priority = 2)
+	public void addMajorWithoutDataFailed() throws InterruptedException {
 		String majorId = "";
 		String majorName = "";
 		String abbreviation = "";
@@ -69,7 +55,8 @@ public class AddMajorTestNG {
 		saveUnsuccessful();
 	}
 	
-	private void addMajorWithSpecialCharacterFailed() throws InterruptedException {
+	@Test(priority = 3)
+	public void addMajorWithSpecialCharacterFailed() throws InterruptedException {
 		String majorId = "!";
 		String majorName = "a";
 		String abbreviation = "a";
@@ -81,7 +68,8 @@ public class AddMajorTestNG {
 		saveUnsuccessful();
 	}
 	
-	private void addMajorWithoutCTDTFailed() throws InterruptedException {
+	@Test(priority = 4)
+	public void addMajorWithoutCTDTFailed() throws InterruptedException {
 		String majorId = "a";
 		String majorName = "a";
 		String abbreviation = "a";
@@ -93,10 +81,14 @@ public class AddMajorTestNG {
 		saveUnsuccessful();
 	}
 	
+	@AfterClass
+	public void afterClass() {
+		webDriver.quit();
+	}
+	
 	private void saveUnsuccessful() throws InterruptedException {
-		if (termAndMajor.isEnableSaveMajorButton()) {
+		if (termAndMajor.isErrorMessagesDisplayed()) {
 			termAndMajor.closeMajorFormButtonPressed();
-			System.out.println("Pass");
 			System.out.println("Lưu không thành công");
 		}
 	}

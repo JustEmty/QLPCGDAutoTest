@@ -38,23 +38,19 @@ public class SearchMajorTestNG {
 		loginPage.loginToWebsite();
 		termAndMajor.moveToMajorTab();
 	}
-	
-	@Test
-	public void test() throws InterruptedException {
-		searchMajorSucceed();
-	}
-  
-	@AfterTest
-	public void afterTest() {
-		webDriver.quit();
-	}
 
-	private void searchMajorSucceed() throws InterruptedException {
+	@Test
+	public void searchMajorSucceed() throws InterruptedException {
 		String data = "a";
 		termAndMajor.searchData(data);
 		
 		termAndMajor.getMajorDataTable();
 		
 		System.out.println("Lấy dữ liệu thành công");
+	}
+  
+	@AfterTest
+	public void afterTest() {
+		webDriver.quit();
 	}
 }

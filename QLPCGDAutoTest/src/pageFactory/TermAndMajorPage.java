@@ -177,4 +177,12 @@ public class TermAndMajorPage {
 		    System.out.println();
 		}
 	}
+	
+	public boolean isErrorMessagesDisplayed() {
+		if(webDriver.findElement(By.className("error")).isDisplayed()) {
+			return true;
+		}
+		
+		return false;
+	}
 }

@@ -38,25 +38,21 @@ public class DeleteMajorTestNG {
 	}
   
 	@Test
-	public void test() throws InterruptedException {
-		deleteMajorSucceed();
-		deleteMajorFailed();
-	}
-
-	@AfterTest
-	public void afterTest() {	
-		webDriver.quit();
-	}
-	
-	private void deleteMajorSucceed() throws InterruptedException {
+	public void deleteMajorSucceed() throws InterruptedException {
 		termAndMajor.deleteMajorFormButtonPressed();
 		termAndMajor.confirmDeleteMajorFormButtonPressed();
 		System.out.println("Xóa thành công!");
 	}
 	
-	private void deleteMajorFailed() throws InterruptedException {
+	@Test
+	public void deleteMajorFailed() throws InterruptedException {
 		termAndMajor.deleteMajorFormButtonPressed();
 		termAndMajor.cancelDeleteMajorFormButtonPressed();
 		System.out.println("Xóa không thành công!");
+	}
+	
+	@AfterTest
+	public void afterTest() {	
+		webDriver.quit();
 	}
 }

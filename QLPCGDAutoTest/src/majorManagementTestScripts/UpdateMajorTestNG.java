@@ -35,17 +35,7 @@ public class UpdateMajorTestNG {
 	}
 	
 	@Test
-	public void test() throws InterruptedException {
-		updateMajorSucceed();
-		updateMajorWithoutDataFailed();
-	}
-  
-	@AfterTest
-	public void afterTest() {
-		webDriver.quit();
-	}
-	
-	private void updateMajorSucceed() throws InterruptedException {
+	public void updateMajorSucceed() throws InterruptedException {
 		String majorName = "AutoTest";
 		String abbreviation = "AT";
 		
@@ -56,7 +46,8 @@ public class UpdateMajorTestNG {
 		System.out.println("Lưu thành công");
 	}
 	
-	private void updateMajorWithoutDataFailed() throws InterruptedException {
+	@Test
+	public void updateMajorWithoutDataFailed() throws InterruptedException {
 		String majorName = "";
 		String abbreviation = "";
 		
@@ -67,13 +58,15 @@ public class UpdateMajorTestNG {
 		saveUnsuccessful();
 	}
 	
+	@AfterTest
+	public void afterTest() {
+		webDriver.quit();
+	}
 	
 	private void saveUnsuccessful() throws InterruptedException {
-		if (termAndMajor.isEnableSaveMajorButton()) {
+		if (termAndMajor.isErrorMessagesDisplayed()) {
 			termAndMajor.closeMajorFormButtonPressed();
-			System.out.println("Pass");
 			System.out.println("Lưu không thành công");
 		}
 	}
-
 }

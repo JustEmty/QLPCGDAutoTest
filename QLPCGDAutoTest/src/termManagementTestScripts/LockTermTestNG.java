@@ -31,21 +31,20 @@ public class LockTermTestNG {
 	}
 
 	@Test
-	  public void TestCase1() throws InterruptedException{
-		  termPage.khoaHocKy();
-		  String thongBaoThanhCongExpect = "Cập nhật trạng thái thành công!";
-		  String thongBaoThanhCongActual = webDriver.findElement(By.className("toast-message")).getText();
-		  if(thongBaoThanhCongActual.contentEquals(thongBaoThanhCongExpect)){
-			  System.out.println("Pass");
-			  System.out.println("Thông báo khóa học kỳ thành công theo mong đợi là: " + thongBaoThanhCongExpect);
-			  System.out.println("Thông báo khóa học kỳ thành công theo thực tế là: " + thongBaoThanhCongActual);
-		  }
-		  else {
-			  System.out.println("Fail");
-			  System.out.println("Thông báo khóa học kỳ thành công theo mong đợi là: " + thongBaoThanhCongExpect);
-			  System.out.println("Thông báo khóa học kỳ thành công theo thực tế là: " + thongBaoThanhCongActual);
+	public void TestCase1() throws InterruptedException {
+		termPage.khoaHocKy();
+		String thongBaoThanhCongExpect = "Cập nhật trạng thái thành công!";
+		String thongBaoThanhCongActual = webDriver.findElement(By.className("toast-message")).getText();
+		if (thongBaoThanhCongActual.contentEquals(thongBaoThanhCongExpect)) {
+			System.out.println("Pass");
+			System.out.println("Thông báo khóa học kỳ thành công theo mong đợi là: " + thongBaoThanhCongExpect);
+			System.out.println("Thông báo khóa học kỳ thành công theo thực tế là: " + thongBaoThanhCongActual);
+		} else {
+			System.out.println("Fail");
+			System.out.println("Thông báo khóa học kỳ thành công theo mong đợi là: " + thongBaoThanhCongExpect);
+			System.out.println("Thông báo khóa học kỳ thành công theo thực tế là: " + thongBaoThanhCongActual);
 		}
-	  }
+	}
 
 	@AfterTest
 	public void afterTest() {
