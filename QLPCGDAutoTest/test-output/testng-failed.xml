@@ -3,16 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="majorManagementTestScripts.AddMajorTestNG">
+      <class name="userProfileManagementTestScripts.updateUserProfileTestNG">
         <methods>
-          <include name="addMajorWithSpecialCharacterFailed"/>
-          <include name="afterClass"/>
-          <include name="addMajorWithoutDataFailed"/>
-          <include name="addMajorSucceed"/>
-          <include name="addMajorWithoutCTDTFailed"/>
-          <include name="beforeClass"/>
+          <include name="afterTest"/>
+          <include name="setUp"/>
+          <include name="TestCase1"/>
         </methods>
-      </class> <!-- majorManagementTestScripts.AddMajorTestNG -->
+      </class> <!-- userProfileManagementTestScripts.updateUserProfileTestNG -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
