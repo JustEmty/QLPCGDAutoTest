@@ -27,7 +27,6 @@ public class LoginPage {
 	public void loginToWebsite() throws InterruptedException {
 		webDriver.manage().window().maximize();
 		webDriver.navigate().to(pcgdWebsiteLink);
-
 		
 		detailsButton.click();
 		Thread.sleep(1500);

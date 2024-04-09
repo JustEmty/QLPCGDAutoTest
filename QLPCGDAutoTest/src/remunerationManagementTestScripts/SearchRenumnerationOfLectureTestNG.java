@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import data.DataContainer;
 import pageFactory.LoginPage;
+import pageFactory.RemunerationOfLecturerPage;
 
 import org.testng.annotations.BeforeTest;
 
@@ -22,15 +23,18 @@ public class SearchRenumnerationOfLectureTestNG {
 
 	private WebDriver webDriver;
 	private LoginPage loginPage;
-
+	private RemunerationOfLecturerPage remunerationOfLecturerPage;
+	
 	@BeforeTest
 	public void setUp() throws InterruptedException {
 		System.setProperty(DataContainer.WEBDRIVER_CHROME_DRIVER, DataContainer.WEBDRIVER_CHROME_DRIVER_PATH);
-
+		
 		webDriver = new ChromeDriver();
 		loginPage = new LoginPage(webDriver);
-
+		remunerationOfLecturerPage = new RemunerationOfLecturerPage(webDriver);
+		
 		loginPage.loginToWebsite();
+		remunerationOfLecturerPage.chonMucThuLaoGV();
 	}
 
 	@Test
@@ -39,32 +43,14 @@ public class SearchRenumnerationOfLectureTestNG {
 
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-		// Chọn mục Thù lao ở thanh Menu
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[6]/a")).click();
-		Thread.sleep(2000);
-
-		// Chọn mục Thù lao GV ở thanh Menu
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[6]/ul/li[5]/a")).click();
-		Thread.sleep(2000);
-
 		// Chọn học kỳ
-		webDriver.findElement(By.xpath("//*[@id=\"select2-term-container\"]")).click();
-		Thread.sleep(2000);
-		WebElement chon_hk = webDriver.findElement(By.xpath(
-				"/html/body/div[2]/div[2]/div[3]/div/section/div/div/div/div[2]/div[1]/div[1]/div/span[2]/span/span[1]/input"));
-		chon_hk.sendKeys("809");
-		Thread.sleep(2000);
-		chon_hk.sendKeys(Keys.ENTER);
-		Thread.sleep(2000);
+		remunerationOfLecturerPage.chonHocKy("999");
 
 		// Chọn nút chọn số dữ liệu hiển thị và chọn tất cả
-		webDriver.findElement(By.xpath("//*[@id=\"tblRemuneration_length\"]/label/select")).click();
-		Actions actions = new Actions(webDriver);
-		actions.sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
+		remunerationOfLecturerPage.chonSLDuLieuHienThi();
 
 		// Nhấn vào ô tìm kiếm Thù lao và nhập nội dung
-		webDriver.findElement(By.xpath("//*[@id=\"tblRemuneration_filter\"]/label/input")).sendKeys(nd_cantimkiem);
+		remunerationOfLecturerPage.timKiemThuLao("hi");
 
 		// Lấy số hàng
 		List<WebElement> row = webDriver.findElements(By.xpath("//*[@id=\"tblRemuneration\"]/tbody/tr"));
@@ -89,26 +75,14 @@ public class SearchRenumnerationOfLectureTestNG {
 
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-		String nd_cantimkiem = "hi"; // Nhập nội dung cần tìm kiếm vào đây
-
 		// Chọn học kỳ
-		webDriver.findElement(By.xpath("//*[@id=\"select2-term-container\"]")).click();
-		Thread.sleep(2000);
-		WebElement chon_hk = webDriver.findElement(By.xpath(
-				"/html/body/div[2]/div[2]/div[3]/div/section/div/div/div/div[2]/div[1]/div[1]/div/span[2]/span/span[1]/input"));
-		chon_hk.sendKeys("809");
-		Thread.sleep(2000);
-		chon_hk.sendKeys(Keys.ENTER);
-		Thread.sleep(2000);
+		remunerationOfLecturerPage.chonHocKy("999");
 
 		// Chọn nút chọn số dữ liệu hiển thị và chọn tất cả
-		webDriver.findElement(By.xpath("//*[@id=\"tblRemuneration_length\"]/label/select")).click();
-		Actions actions = new Actions(webDriver);
-		actions.sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
+		remunerationOfLecturerPage.chonSLDuLieuHienThi();
 
 		// Nhấn vào ô tìm kiếm Thù lao và nhập nội dung
-		webDriver.findElement(By.xpath("//*[@id=\"tblRemuneration_filter\"]/label/input")).sendKeys(nd_cantimkiem);
+		remunerationOfLecturerPage.timKiemThuLao("hi");
 
 		// Lấy dòng nội dung số lượng dữ liệu hiển thị và tách chuỗi ra rồi bỏ vào mảng
 		WebElement so_du_lieu_hien_thi = webDriver.findElement(By.xpath("//*[@id=\"tblRemuneration_info\"]"));
@@ -135,14 +109,7 @@ public class SearchRenumnerationOfLectureTestNG {
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		// Chọn học kỳ
-		webDriver.findElement(By.xpath("//*[@id=\"select2-term-container\"]")).click();
-		Thread.sleep(2000);
-		WebElement chon_hk = webDriver.findElement(By.xpath(
-				"/html/body/div[2]/div[2]/div[3]/div/section/div/div/div/div[2]/div[1]/div[1]/div/span[2]/span/span[1]/input"));
-		chon_hk.sendKeys("809");
-		Thread.sleep(2000);
-		chon_hk.sendKeys(Keys.ENTER);
-		Thread.sleep(2000);
+		remunerationOfLecturerPage.chonHocKy("999");
 
 		// Chạy các phần tử li bằng vòng lặp for
 		for (int i = 2; i <= 5; i++) {

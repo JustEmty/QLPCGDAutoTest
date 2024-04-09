@@ -16,13 +16,12 @@ public class TermPage {
 
 	private WebDriver webDriver;
 	private Actions actions;
-	
 	@FindBy(xpath = "//*[@id=\"main-menu-navigation\"]/li[2]/a/span") private WebElement chonMucHK;
-	@FindBy(xpath = "//*[@id=\"tblTerm_length\"]/label/select") private WebElement chonSLKocKy;
+	@FindBy(xpath = "//*[@id=\"tblTerm_length\"]/label/select") private WebElement chonSLHocKy;
 	@FindBy(xpath = "/html/body/div[2]/nav/div/div/ul[2]/li/a/i") private WebElement toanVaThuManHinh;
 	@FindBy(xpath = "//*[@id=\"tblTerm_filter\"]/label/input") private WebElement timKiemHK;
 	@FindBy(xpath = "//*[@id=\"tblTerm_info\"]") private WebElement hienThiSoLuongDuLieu;
-	@FindBy(xpath = "//*[@id=\"tblTerm\"]/tbody/tr") private WebElement soCotDuLieu;
+	@FindBy(xpath = "//*[@id=\"tblTerm\"]/tbody/tr") private WebElement soHangDuLieu;
 	@FindBy(xpath = "//*[@id=\"tblTerm_wrapper\"]/div[1]/div[2]/div/div[2]/button") private WebElement nutThemMoi;
 	@FindBy(xpath = "//*[@id=\"id\"]") private WebElement nhapHocKy;
 	@FindBy(xpath = "//*[@id=\"select2-start_year-container\"]") private WebElement chonNamBD;
@@ -40,6 +39,7 @@ public class TermPage {
 	@FindBy(xpath = "/html/body/div[3]/div/div[6]/button[1]") private WebElement nutXoa;
 	@FindBy(xpath = "/html/body/div[3]/div/div[6]/button[3]") private WebElement nutHuy;
 	@FindBy(xpath = "//*[@id=\"tblTerm\"]/tbody/tr[1]/td[8]") private WebElement nutKhoa;
+	@FindBy(xpath = "/html/body/div[2]/button") private WebElement nutTroVeDauTrang;
 	
 	public TermPage(WebDriver webDriver) {
 		this.webDriver = webDriver;
@@ -47,15 +47,13 @@ public class TermPage {
 		
 		actions = new Actions(webDriver);
 	}
-	
 	public void chonMucHocKy() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		chonMucHK.click();
 	}
-	
 	public void scroll() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		chonSLKocKy.click();
+		chonSLHocKy.click();
 		Thread.sleep(2000);
 		actions.sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
 		JavascriptExecutor js = (JavascriptExecutor) webDriver;
@@ -63,21 +61,18 @@ public class TermPage {
 		Thread.sleep(2000);
 		js.executeScript("window.scrollBy(0, -2000)", "");
 	}
-	
 	public void nhanNutVeDauTrang() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		JavascriptExecutor js = (JavascriptExecutor) webDriver;
 		js.executeScript("window.scrollBy(0, 4000)", "");
 		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("/html/body/div[2]/button")).click();
+		nutTroVeDauTrang.click();
 		Thread.sleep(2000);
 	}
-	
 	public void toanVaThuManHinh() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		toanVaThuManHinh.click();
 	}
-	
 	public void themHocKy(String maHK, String tuanBD, String nam, String tietToiDa, String lopToiDa) throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		
@@ -144,7 +139,6 @@ public class TermPage {
 		  // Nhấn nút Lưu
 		  nutLuu.click();
 	}
-	
 	public void suaHocKy(String tuanBD, String nam, String tietToiDa, String lopToiDa) throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		
@@ -207,23 +201,30 @@ public class TermPage {
 		  // Nhấn nút Lưu
 		  nutLuu.click();
 	}
-	
 	public void xoaHocKy() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		nutXoaHocKy.click();
 		Thread.sleep(2000);
 		nutXoa.click();
 	}
-	
 	public void huyXoaHocKy() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		nutXoaHocKy.click();
 		Thread.sleep(2000);
 		nutHuy.click();
 	}
-	
 	public void khoaHocKy() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		nutKhoa.click();
+	}
+	public void chonSLDuLieuHienThi() throws InterruptedException {
+		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		chonSLHocKy.click();
+		Thread.sleep(2000);
+		actions.sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
+	}
+	public void timKiemHocKy(String noidung_timkiem) throws InterruptedException {
+		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		timKiemHK.sendKeys(noidung_timkiem);;
 	}
 }

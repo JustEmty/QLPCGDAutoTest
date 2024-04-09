@@ -3,6 +3,7 @@ package timetableManagementTestScripts;
 import org.testng.annotations.Test;
 
 import data.DataContainer;
+import pageFactory.ImportTKBPage;
 import pageFactory.LoginPage;
 
 import org.testng.annotations.BeforeTest;
@@ -12,6 +13,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -24,6 +26,7 @@ public class ImportTimetableTestNG {
 
 	private WebDriver webDriver;
 	private LoginPage loginPage;
+	private ImportTKBPage importTKBPage;
 
 	@BeforeTest
 	public void setUp() throws InterruptedException {
@@ -31,68 +34,52 @@ public class ImportTimetableTestNG {
 
 		webDriver = new ChromeDriver();
 		loginPage = new LoginPage(webDriver);
+		importTKBPage = new ImportTKBPage(webDriver);
 
 		loginPage.loginToWebsite();
+		importTKBPage.chonMucImportTKB();
 	}
 
-	@Test
+	@Test(priority = 1)
 	public void TestCase1() throws InterruptedException {
-
-		String filePath = "C:\\Users\\OS\\Downloads\\CNTT UIS-ThoiKhoaBieu_TieuChuan_Mau.xlsx";
-		// Nhấn vào mục Thời khóa biểu
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[4]/a/span")).click();
-		Thread.sleep(2000);
-		// Chọn vào mục Phân Công
-		webDriver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/ul/li[4]/ul/li[1]/a/span")).click();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"select2-term-container\"]")).click();
-		Thread.sleep(2000);
-		WebElement chon_hk = webDriver.findElement(By.xpath(
-				"/html/body/div[2]/div[2]/div[3]/div/section/div[1]/div/div/div[2]/form/div[1]/div[1]/div/span[2]/span/span[1]/input"));
-		Thread.sleep(2000);
-		chon_hk.sendKeys(Keys.ENTER);
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"select2-major-container\"]")).click();
-		Thread.sleep(2000);
-		WebElement chon_nganh = webDriver.findElement(By.xpath(
-				"/html/body/div[2]/div[2]/div[3]/div/section/div[1]/div/div/div[2]/form/div[1]/div[2]/div/span[2]/span/span[1]/input"));
-		Thread.sleep(2000);
-		chon_nganh.sendKeys(Keys.ENTER);
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"dpz-single-file\"]/div")).click();
-		Thread.sleep(2000);
-		// Khởi tạo Robot class
-		Robot rb = null;
-		try {
-			rb = new Robot();
-		} catch (AWTException e) {
-			e.printStackTrace();
+		importTKBPage.ImportTKB();
+		String thongBaoExpect = "Bạn chưa chọn học kỳ và ngành";
+		String thongBaoActual = webDriver.findElement(By.className("toast-message")).getText();
+		if (thongBaoActual.contentEquals(thongBaoExpect)) {
+			System.out.println("Pass");
+			System.out.println(
+					"Thông báo lỗi khi import TKB chưa chọn học kỳ và ngành theo mong đợi là: " + thongBaoExpect);
+			System.out.println(
+					"Thông báo lỗi khi import TKB chưa chọn học kỳ và ngành theo thực tế là: " + thongBaoActual);
+		} else {
+			System.out.println("Fail");
+			System.out.println(
+					"Thông báo lỗi khi import TKB chưa chọn học kỳ và ngành theo mong đợi là: " + thongBaoExpect);
+			System.out.println(
+					"Thông báo lỗi khi import TKB chưa chọn học kỳ và ngành theo thực tế là: " + thongBaoActual);
 		}
+	}
 
-		// Copy File path vào Clipboard
-		StringSelection str = new StringSelection
-				(filePath);
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(str, null);
-
+	@Test(priority = 2)
+	public void TestCase2() throws InterruptedException {
+		webDriver.navigate().refresh();
+		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		importTKBPage.chonHocKy_Nganh("120", "công nghệ thông tinnnn");
 		Thread.sleep(2000);
-
-		// Nhấn Control+V để dán
-		rb.keyPress(KeyEvent.VK_CONTROL);
-		rb.keyPress(KeyEvent.VK_V);
-
-		// Xác nhận Control V trên
-		rb.keyRelease(KeyEvent.VK_CONTROL);
-		rb.keyRelease(KeyEvent.VK_V);
-
+		importTKBPage.ImportTKB();
 		Thread.sleep(2000);
-
-		// Nhấn Enter
-		rb.keyPress(KeyEvent.VK_ENTER);
-		rb.keyRelease(KeyEvent.VK_ENTER);
-
-		Thread.sleep(4000);
-		webDriver.findElement(By.xpath("//*[@id=\"submit-all\"]")).click();
-
+		importTKBPage.tiepTucImport();
+		String thongBaoExpect = "Học kỳ và ngành này đã có dữ liệu trong hệ thống, bạn muốn cập nhật hay thay thế thời khoá biểu?";
+		String thongBaoActual = webDriver.findElement(By.xpath("//*[@id=\"swal2-html-container\"]")).getText();
+		if (thongBaoActual.contentEquals(thongBaoExpect)) {
+			System.out.println("Pass");
+			System.out.println("Thông báo khi import TKB theo mong đợi là: " + thongBaoExpect);
+			System.out.println("Thông báo khi import TKB theo thực tế là: " + thongBaoActual);
+		} else {
+			System.out.println("Fail");
+			System.out.println("Thông báo khi import TKB theo mong đợi là: " + thongBaoExpect);
+			System.out.println("Thông báo khi import TKB theo thực tế là: " + thongBaoActual);
+		}
 	}
 
 	@AfterTest

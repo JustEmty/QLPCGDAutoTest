@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import data.DataContainer;
 import pageFactory.LoginPage;
+import pageFactory.TermPage;
 
 import org.testng.annotations.BeforeTest;
 
@@ -21,6 +22,7 @@ public class SearchTermTestNG {
 
 	private WebDriver webDriver;
 	private LoginPage loginPage;
+	private TermPage termPage;
 
 	@BeforeTest
 	public void setUp() throws InterruptedException {
@@ -28,26 +30,19 @@ public class SearchTermTestNG {
 
 		webDriver = new ChromeDriver();
 		loginPage = new LoginPage(webDriver);
+		termPage = new TermPage(webDriver);
 
 		loginPage.loginToWebsite();
+		termPage.chonMucHocKy();
 	}
 
 	@Test
 	public void TestCase1() throws InterruptedException {
-		String nd_cantimkiem = "8"; // Nhập nội dung cần tìm kiếm vào đây
-
-		// Chọn mục Học Kỳ và Ngành ở thanh Menu
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[2]/a/span")).click();
-		Thread.sleep(2000);
-
 		// Chọn nút chọn số dữ liệu hiển thị và chọn tất cả
-		webDriver.findElement(By.xpath("//*[@id=\"tblTerm_length\"]/label/select")).click();
-		Actions actions = new Actions(webDriver);
-		actions.sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
+		termPage.chonSLDuLieuHienThi();
 
 		// Nhấn vào ô tìm kiếm học kỳ và nhập nội dung
-		webDriver.findElement(By.xpath("//*[@id=\"tblTerm_filter\"]/label/input")).sendKeys(nd_cantimkiem);
+		termPage.timKiemHocKy("8");
 
 		// In dữ liệu hiển thị khi tìm kiếm ra màn hình
 		System.out.println("Dữ liệu hiển thị khi nhập nội dung tìm kiếm:");
@@ -67,16 +62,11 @@ public class SearchTermTestNG {
 		webDriver.navigate().refresh();
 		Thread.sleep(2000);
 
-		String nd_cantimkiem = "8"; // Nhập nội dung cần tìm kiếm vào đây
-
 		// Chọn nút chọn số dữ liệu hiển thị và chọn tất cả
-		webDriver.findElement(By.xpath("//*[@id=\"tblTerm_length\"]/label/select")).click();
-		Actions actions = new Actions(webDriver);
-		actions.sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
+		termPage.chonSLDuLieuHienThi();
 
 		// Nhấn vào ô tìm kiếm học kỳ và nhập nội dung
-		webDriver.findElement(By.xpath("//*[@id=\"tblTerm_filter\"]/label/input")).sendKeys(nd_cantimkiem);
+		termPage.timKiemHocKy("8");
 
 		// Lấy dòng nội dung số lượng dữ liệu hiển thị và tách chuỗi ra rồi bỏ vào mảng
 		WebElement so_du_lieu_hien_thi = webDriver.findElement(By.xpath("//*[@id=\"tblTerm_info\"]"));
@@ -101,7 +91,7 @@ public class SearchTermTestNG {
 		Thread.sleep(2000);
 
 		// Chạy các phần tử li bằng vòng lặp for
-		for (int i = 2; i <= 8; i++) {
+		for (int i = 2; i <= 5; i++) {
 			webDriver.findElement(By.xpath("//*[@id=\"tblTerm_paginate\"]/ul/li[" + i + "]/a")).click();
 			Thread.sleep(2000);
 		}

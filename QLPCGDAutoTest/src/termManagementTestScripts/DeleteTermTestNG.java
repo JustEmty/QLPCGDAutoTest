@@ -31,7 +31,6 @@ public class DeleteTermTestNG {
 
 		loginPage.loginToWebsite();
 		termPage.chonMucHocKy();
-		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	}
 
 	@Test(priority = 1)

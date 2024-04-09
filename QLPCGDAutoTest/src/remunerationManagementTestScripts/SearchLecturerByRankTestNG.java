@@ -3,6 +3,7 @@ package remunerationManagementTestScripts;
 import org.testng.annotations.Test;
 
 import data.DataContainer;
+import pageFactory.LecturersRankPage;
 import pageFactory.LoginPage;
 
 import org.testng.annotations.BeforeTest;
@@ -11,17 +12,16 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterTest;
 
 public class SearchLecturerByRankTestNG {
 
 	private WebDriver webDriver;
 	private LoginPage loginPage;
+	private LecturersRankPage lecturersRankPage;
 
 	@BeforeTest
 	public void setUp() throws InterruptedException {
@@ -29,32 +29,20 @@ public class SearchLecturerByRankTestNG {
 
 		webDriver = new ChromeDriver();
 		loginPage = new LoginPage(webDriver);
+		lecturersRankPage = new LecturersRankPage(webDriver);
 
 		loginPage.loginToWebsite();
+		lecturersRankPage.chonMucCapBacGV();
 	}
 
 	@Test
 	public void TestCase1() throws InterruptedException {
-		String nd_cantimkiem = "Q"; // Nhập nội dung cần tìm kiếm vào đây
-
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
-		// Chọn mục Thù lao ở thanh Menu
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[6]/a")).click();
-		Thread.sleep(2000);
-
-		// Chọn mục Cấp bậc GV
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[6]/ul/li[4]/a/span")).click();
-		Thread.sleep(2000);
-
 		// Chọn nút chọn số dữ liệu hiển thị và chọn tất cả
-		webDriver.findElement(By.xpath("//*[@id=\"tblLecturerRank_length\"]/label/select")).click();
-		Actions actions = new Actions(webDriver);
-		actions.sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
+		lecturersRankPage.chonSLDuLieuHienThi();
 
 		// Nhấn vào ô tìm kiếm cấp bậc và nhập nội dung
-		webDriver.findElement(By.xpath("//*[@id=\"tblLecturerRank_filter\"]/label/input")).sendKeys(nd_cantimkiem);
+		lecturersRankPage.timKiemCapBac("Q");
 
 		// Lấy số hàng
 		List<WebElement> row = webDriver.findElements(By.xpath("//*[@id=\"tblLecturerRank\"]/tbody/tr"));
@@ -76,19 +64,12 @@ public class SearchLecturerByRankTestNG {
 		// Tải lại trang
 		webDriver.navigate().refresh();
 		Thread.sleep(2000);
-
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
-		String nd_cantimkiem = "Q"; // Nhập nội dung cần tìm kiếm vào đây
-
 		// Chọn nút chọn số dữ liệu hiển thị và chọn tất cả
-		webDriver.findElement(By.xpath("//*[@id=\"tblLecturerRank_length\"]/label/select")).click();
-		Actions actions = new Actions(webDriver);
-		actions.sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
+		lecturersRankPage.chonSLDuLieuHienThi();
 
 		// Nhấn vào ô tìm kiếm cấp bậc và nhập nội dung
-		webDriver.findElement(By.xpath("//*[@id=\"tblLecturerRank_filter\"]/label/input")).sendKeys(nd_cantimkiem);
+		lecturersRankPage.timKiemCapBac("Q");
 
 		// Lấy dòng nội dung số lượng dữ liệu hiển thị và tách chuỗi ra rồi bỏ vào mảng
 		WebElement so_du_lieu_hien_thi = webDriver.findElement(By.xpath("//*[@id=\"tblLecturerRank_info\"]"));

@@ -77,7 +77,6 @@ public class UpdateTermTestNG {
 			System.out.println("Thông báo lỗi của trường nhập lớp tối đa mong đợi là: " + lopTDErrorExpect);
 			System.out.println("Thông báo lỗi của trường nhập lớp tối đa thực tế là: " + lopTDErrorActual);
 		}
-		;
 	}
 
 	@AfterTest

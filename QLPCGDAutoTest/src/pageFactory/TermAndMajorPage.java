@@ -83,35 +83,35 @@ public class TermAndMajorPage {
 	}
 	
 	public void addDataToMajorForm(String majorId, String majorName, String abbreviation, CTDT ctdt) throws InterruptedException{
-		majorIdField.sendKeys(majorId);
-		Thread.sleep(2000);
-		
-		majorNameField.sendKeys(majorName);
-		Thread.sleep(2000);
-		
-		abbreviationField.sendKeys(abbreviation);
-		Thread.sleep(2000);
+//		majorIdField.sendKeys(majorId);
+//		Thread.sleep(2000);
+//		
+//		majorNameField.sendKeys(majorName);
+//		Thread.sleep(2000);
+//		
+//		abbreviationField.sendKeys(abbreviation);
+//		Thread.sleep(2000);
 		
 		Actions actions = new Actions(webDriver);
-		actions.moveToElement(abbreviationField).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
-		
-		switch (ctdt) {
-			case TieuChuan:
-				actions.sendKeys(Keys.ARROW_UP).sendKeys(Keys.ENTER).perform();
-				Thread.sleep(2000);
-				break;
-			case DacBiet:
-				actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
-				Thread.sleep(2000);
-				break;
-			case CTDT:
-				actions.sendKeys(Keys.TAB).perform();
-				Thread.sleep(2000);
-				break;
-			default:
-				break;
-		}
+//		actions.moveToElement(abbreviationField).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).perform();
+//		Thread.sleep(2000);
+//		
+//		switch (ctdt) {
+//			case TieuChuan:
+//				actions.sendKeys(Keys.ARROW_UP).sendKeys(Keys.ENTER).perform();
+//				Thread.sleep(2000);
+//				break;
+//			case DacBiet:
+//				actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
+//				Thread.sleep(2000);
+//				break;
+//			case CTDT:
+//				actions.sendKeys(Keys.TAB).perform();
+//				Thread.sleep(2000);
+//				break;
+//			default:
+//				break;
+//		}
 		
 		actions.click(saveMajorButton).perform();
 		Thread.sleep(2000);
@@ -182,7 +182,10 @@ public class TermAndMajorPage {
 		if(webDriver.findElement(By.className("error")).isDisplayed()) {
 			return true;
 		}
-		
 		return false;
+	}
+
+	public void getToastMessage() {
+		System.out.println("Toast Message: " + webDriver.findElement(By.className("toast-message")).getText());
 	}
 }

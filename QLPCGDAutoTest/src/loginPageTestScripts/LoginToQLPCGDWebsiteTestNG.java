@@ -22,19 +22,9 @@ public class LoginToQLPCGDWebsiteTestNG {
 		webDriver = new ChromeDriver();
 		loginPage = new LoginPage(webDriver);
 	}
-	
+
 	@Test
-	public void test() {
-		loginToQLPCGDWebsiteSucceed();
-	}
-  
-
-	@AfterTest
-	public void afterTest() {
-		webDriver.quit();
-	}
-
-	private void loginToQLPCGDWebsiteSucceed() {
+	public void loginToQLPCGDWebsiteSucceed() {
 		try {
 			loginPage.loginToWebsite();
 			System.out.println("Login Succeed!");
@@ -42,5 +32,11 @@ public class LoginToQLPCGDWebsiteTestNG {
 			e.printStackTrace();
 			System.out.println("Login Failed!");
 		}
+	}
+	
+
+	@AfterTest
+	public void afterTest() {
+		webDriver.quit();
 	}
 }

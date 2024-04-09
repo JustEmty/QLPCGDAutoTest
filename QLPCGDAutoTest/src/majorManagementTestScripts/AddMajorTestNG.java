@@ -38,8 +38,7 @@ public class AddMajorTestNG {
 		termAndMajor.addMajorButtonPressed();
 		
 		termAndMajor.addDataToMajorForm(majorId, majorName, abbreviation, CTDT.DacBiet);
-		
-		System.out.println("Lưu thành công");
+		termAndMajor.getToastMessage();
 	}
 
 	@Test(priority = 2)

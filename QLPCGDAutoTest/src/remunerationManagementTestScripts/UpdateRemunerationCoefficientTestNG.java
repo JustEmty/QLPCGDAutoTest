@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import data.DataContainer;
 import pageFactory.LoginPage;
+import pageFactory.RemunerationCoefficientPage;
 
 import org.testng.annotations.BeforeTest;
 
@@ -20,6 +21,7 @@ public class UpdateRemunerationCoefficientTestNG {
 
 	private WebDriver webDriver;
 	private LoginPage loginPage;
+	private RemunerationCoefficientPage remunerationCoefficientPage;
 
 	@BeforeTest
 	public void setUp() throws InterruptedException {
@@ -27,91 +29,43 @@ public class UpdateRemunerationCoefficientTestNG {
 
 		webDriver = new ChromeDriver();
 		loginPage = new LoginPage(webDriver);
+		remunerationCoefficientPage = new RemunerationCoefficientPage(webDriver);
 
 		loginPage.loginToWebsite();
+		remunerationCoefficientPage.chonMucDonGiaHeSo();
 	}
 
 	@Test
 	public void TestCase1() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		// Nhấn vào mục Thù lao
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[6]/a")).click();
-		Thread.sleep(2000);
-		// Chọn vào mục Cấp bậc GV
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[6]/ul/li[2]/a/span")).click();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"tblStandard\"]/tbody/tr[1]/td[3]/a/i")).click();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"price\"]")).sendKeys("1000000");
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"unitprice-form\"]/div[3]/button[2]")).click();
-		Thread.sleep(2000);
+		remunerationCoefficientPage.suaDonGia("1000000");
+		String thongBaoThanhCongExpect = "Lưu thành công!";
+		String thongBaoThanhCongActual = webDriver.findElement(By.className("toast-message")).getText();
+		if (thongBaoThanhCongActual.contentEquals(thongBaoThanhCongExpect)) {
+			System.out.println("Pass");
+			System.out.println("Thông báo sửa đơn giá thành công theo mong đợi là: " + thongBaoThanhCongExpect);
+			System.out.println("Thông báo sửa đơn giá thành công theo thực tế là: " + thongBaoThanhCongActual);
+		} else {
+			System.out.println("Fail");
+			System.out.println("Thông báo sửa đơn giá thành công theo mong đợi là: " + thongBaoThanhCongExpect);
+			System.out.println("Thông báo sửa đơn giá thành công theo thực tế là: " + thongBaoThanhCongActual);
+		}
 	}
 
 	@Test
 	public void TestCase2() throws InterruptedException {
-		webDriver.navigate().refresh();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"tblStandard\"]/tbody/tr[1]/td[3]/a[1]/i")).click();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"btnClose\"]")).click();
-		Thread.sleep(2000);
-	}
-
-	@Test
-	public void TestCase3() throws InterruptedException {
-		webDriver.navigate().refresh();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"coefficient-tab\"]")).click();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"tblCoefficient\"]/tbody/tr/td[5]/a/i")).click();
-		Thread.sleep(2000);
-		Actions actions = new Actions(webDriver);
-		actions.sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"vietnamese_coefficient\"]")).sendKeys("1.5");
-		Thread.sleep(2000);
-		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"foreign_coefficient\"]")).sendKeys("1.1");
-		Thread.sleep(2000);
-		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"theoretical_coefficient\"]")).sendKeys("1.1");
-		Thread.sleep(2000);
-		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"practice_coefficient\"]")).sendKeys("1.2");
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"coefficient-form\"]/div[3]/button[2]")).click();
-	}
-
-	@Test
-	public void TestCase4() throws InterruptedException {
-		webDriver.navigate().refresh();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"coefficient-tab\"]")).click();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"tblCoefficient\"]/tbody/tr/td[5]/a/i")).click();
-		Thread.sleep(2000);
-		Actions actions = new Actions(webDriver);
-		actions.sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"vietnamese_coefficient\"]")).sendKeys("1.5");
-		Thread.sleep(2000);
-		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"foreign_coefficient\"]")).sendKeys("1.1");
-		Thread.sleep(2000);
-		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"theoretical_coefficient\"]")).sendKeys("1.1");
-		Thread.sleep(2000);
-		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"practice_coefficient\"]")).sendKeys("1.2");
-		Thread.sleep(2000);
-		webDriver.findElement(By.xpath("//*[@id=\"btnClose\"]")).click();
+		remunerationCoefficientPage.suaHeSo("1.5", "1.1", "1.1", "1.2");
+		String thongBaoThanhCongExpect = "Lưu thành công!";
+		String thongBaoThanhCongActual = webDriver.findElement(By.className("toast-message")).getText();
+		if (thongBaoThanhCongActual.contentEquals(thongBaoThanhCongExpect)) {
+			System.out.println("Pass");
+			System.out.println("Thông báo sửa hệ số thành công theo mong đợi là: " + thongBaoThanhCongExpect);
+			System.out.println("Thông báo sửa hệ số thành công theo thực tế là: " + thongBaoThanhCongActual);
+		} else {
+			System.out.println("Fail");
+			System.out.println("Thông báo sửa hệ số thành công theo mong đợi là: " + thongBaoThanhCongExpect);
+			System.out.println("Thông báo sửa hệ số thành công theo thực tế là: " + thongBaoThanhCongActual);
+		}
 	}
 
 	@AfterTest

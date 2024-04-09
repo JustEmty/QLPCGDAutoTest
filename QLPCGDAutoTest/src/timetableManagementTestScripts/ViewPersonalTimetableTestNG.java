@@ -4,13 +4,13 @@ import org.testng.annotations.Test;
 
 import data.DataContainer;
 import pageFactory.LoginPage;
+import pageFactory.ViewPersonalTimetablePage;
 
 import org.testng.annotations.BeforeTest;
 
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,6 +20,7 @@ public class ViewPersonalTimetableTestNG {
 
 	private WebDriver webDriver;
 	private LoginPage loginPage;
+	private ViewPersonalTimetablePage viewPersonalTimetablePage;
 
 	@BeforeTest
 	public void setUp() throws InterruptedException {
@@ -27,18 +28,14 @@ public class ViewPersonalTimetableTestNG {
 
 		webDriver = new ChromeDriver();
 		loginPage = new LoginPage(webDriver);
+		viewPersonalTimetablePage = new ViewPersonalTimetablePage(webDriver);
 
 		loginPage.loginToWebsite();
+		viewPersonalTimetablePage.chonMucXemTKB();
 	}
 
 	@Test
 	public void TestCase1() throws InterruptedException {
-		// Nhấn vào mục Thời khóa biểu
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[4]/a/span")).click();
-		Thread.sleep(2000);
-		// Chọn vào mục Xem TKB
-		webDriver.findElement(By.xpath("//*[@id=\"main-menu-navigation\"]/li[4]/ul/li[3]/a/span")).click();
-		Thread.sleep(2000);
 		String ExpectTitle = "Thời khóa biểu cá nhân";
 		String ActualTitle = webDriver.getTitle().toString();
 		if (ActualTitle.contentEquals(ExpectTitle)) {
@@ -50,17 +47,13 @@ public class ViewPersonalTimetableTestNG {
 			System.out.println("Title mong đợi là: " + ExpectTitle);
 			System.out.println("Title thực tế là: " + ActualTitle);
 		}
+		;
 	}
 
 	@Test
 	public void TestCase2() throws InterruptedException {
-		// Tải lại trang
-		webDriver.navigate().refresh();
-		Thread.sleep(2000);
-
 		// Nhấn nút Full Screen
-		webDriver.findElement(By.xpath("/html/body/div[2]/nav/div/div/ul[2]/li/a/i")).click();
-		Thread.sleep(2000);
+		viewPersonalTimetablePage.toanVaThuManHinh();
 	}
 
 	@Test
@@ -70,13 +63,7 @@ public class ViewPersonalTimetableTestNG {
 		Thread.sleep(2000);
 
 		// Chon Học kỳ
-		webDriver.findElement(By.xpath("//*[@id=\"select2-term-container\"]")).click();
-		Thread.sleep(2000);
-		WebElement nhap_hk = webDriver.findElement(By.xpath(
-				"/html/body/div[2]/div[2]/div[3]/div/section/div/div/div/div[2]/div[1]/div[1]/div/span[2]/span/span[1]/input"));
-		nhap_hk.sendKeys("809");
-		Thread.sleep(2000);
-		nhap_hk.sendKeys(Keys.ENTER);
+		viewPersonalTimetablePage.chonHocKy_Nganh("999");
 		Thread.sleep(2000);
 		List<WebElement> so_hang = webDriver
 				.findElements(By.xpath("//*[@id=\"personalTimetableDiv\"]/div[3]/table/tbody/tr"));
