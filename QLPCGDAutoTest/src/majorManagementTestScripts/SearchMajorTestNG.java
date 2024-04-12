@@ -4,27 +4,18 @@ import org.testng.annotations.Test;
 
 import data.DataContainer;
 import pageFactory.LoginPage;
-import pageFactory.MenuTab;
 import pageFactory.TermAndMajorPage;
 
 import org.testng.annotations.BeforeTest;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterTest;
 
 public class SearchMajorTestNG {
 	
 	private WebDriver webDriver;
 	private LoginPage loginPage;
-	private MenuTab menuTab;
 	private TermAndMajorPage termAndMajor;
 	
 	@BeforeTest

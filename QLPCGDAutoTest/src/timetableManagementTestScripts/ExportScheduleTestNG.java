@@ -32,18 +32,14 @@ public class ExportScheduleTestNG {
 	}
 	
 	@Test
-	public void test() throws InterruptedException {
-		exportScheduleSucceed();
-	}
-
-	@AfterTest
-	public void afterTest() {
-		webDriver.quit();
-	}
-	
-	private void exportScheduleSucceed() throws InterruptedException {
+	public void exportScheduleSucceed() throws InterruptedException {
 		assignmentPage.exportButtonsClicked();
 		
 		System.out.println("Export thời khóa biểu thành công");
+	}
+	
+	@AfterTest
+	public void afterTest() {
+		webDriver.quit();
 	}
 }

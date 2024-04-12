@@ -4,13 +4,14 @@ import org.testng.annotations.Test;
 
 import data.DataContainer;
 import pageFactory.LoginPage;
-import pageFactory.MenuTab;
 import pageFactory.TermAndMajorPage;
 import pageFactory.TermAndMajorPage.CTDT;
 
 import org.testng.annotations.BeforeTest;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 
 public class UpdateMajorTestNG {
@@ -43,7 +44,7 @@ public class UpdateMajorTestNG {
 		
 		termAndMajor.updateDataToMajorForm(majorName, abbreviation, CTDT.TieuChuan);
 		
-		System.out.println("Lưu thành công");
+		Assert.assertEquals(termAndMajor.getToastMessage(), "Cập nhật thành công!");
 	}
 	
 	@Test
@@ -55,7 +56,7 @@ public class UpdateMajorTestNG {
 		
 		termAndMajor.updateDataToMajorForm(majorName, abbreviation, CTDT.DacBiet);
 		
-		saveUnsuccessful();
+		saveUnsuccessful("updateMajorWithoutDataFailed");
 	}
 	
 	@AfterTest
@@ -63,10 +64,15 @@ public class UpdateMajorTestNG {
 		webDriver.quit();
 	}
 	
-	private void saveUnsuccessful() throws InterruptedException {
+	private void saveUnsuccessful(String testCaseName) throws InterruptedException {
 		if (termAndMajor.isErrorMessagesDisplayed()) {
+			for (WebElement errorMessage : termAndMajor.getErrorMessageList()) {
+				System.out.println(errorMessage.getText());
+			}
+			System.out.println("-----");
 			termAndMajor.closeMajorFormButtonPressed();
-			System.out.println("Lưu không thành công");
+			System.out.println("TC: " + testCaseName + " Lưu không thành công");
+			System.out.println("----------");
 		}
 	}
 }

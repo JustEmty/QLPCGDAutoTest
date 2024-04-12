@@ -7,13 +7,9 @@ import pageFactory.LoginPage;
 import pageFactory.TermAndMajorPage;
 
 import org.testng.annotations.BeforeTest;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 
 public class DeleteMajorTestNG {
@@ -41,7 +37,7 @@ public class DeleteMajorTestNG {
 	public void deleteMajorSucceed() throws InterruptedException {
 		termAndMajor.deleteMajorFormButtonPressed();
 		termAndMajor.confirmDeleteMajorFormButtonPressed();
-		System.out.println("Xóa thành công!");
+		Assert.assertEquals(termAndMajor.getToastMessage(), "Xóa thành công!");
 	}
 	
 	@Test

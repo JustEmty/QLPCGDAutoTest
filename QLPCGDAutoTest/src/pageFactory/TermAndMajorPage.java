@@ -83,38 +83,38 @@ public class TermAndMajorPage {
 	}
 	
 	public void addDataToMajorForm(String majorId, String majorName, String abbreviation, CTDT ctdt) throws InterruptedException{
-//		majorIdField.sendKeys(majorId);
-//		Thread.sleep(2000);
-//		
-//		majorNameField.sendKeys(majorName);
-//		Thread.sleep(2000);
-//		
-//		abbreviationField.sendKeys(abbreviation);
-//		Thread.sleep(2000);
+		majorIdField.sendKeys(majorId);
+		Thread.sleep(1000);
+		
+		majorNameField.sendKeys(majorName);
+		Thread.sleep(1000);
+		
+		abbreviationField.sendKeys(abbreviation);
+		Thread.sleep(1000);
 		
 		Actions actions = new Actions(webDriver);
-//		actions.moveToElement(abbreviationField).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).perform();
-//		Thread.sleep(2000);
-//		
-//		switch (ctdt) {
-//			case TieuChuan:
-//				actions.sendKeys(Keys.ARROW_UP).sendKeys(Keys.ENTER).perform();
-//				Thread.sleep(2000);
-//				break;
-//			case DacBiet:
-//				actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
-//				Thread.sleep(2000);
-//				break;
-//			case CTDT:
-//				actions.sendKeys(Keys.TAB).perform();
-//				Thread.sleep(2000);
-//				break;
-//			default:
-//				break;
-//		}
+		actions.moveToElement(abbreviationField).sendKeys(Keys.TAB).sendKeys(Keys.ENTER).perform();
+		Thread.sleep(1000);
+		
+		switch (ctdt) {
+			case TieuChuan:
+				actions.sendKeys(Keys.ARROW_UP).sendKeys(Keys.ENTER).perform();
+				Thread.sleep(1000);
+				break;
+			case DacBiet:
+				actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
+				Thread.sleep(1000);
+				break;
+			case CTDT:
+				actions.sendKeys(Keys.TAB).perform();
+				Thread.sleep(1000);
+				break;
+			default:
+				break;
+		}
 		
 		actions.click(saveMajorButton).perform();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 	}
 	
 	public void updateDataToMajorForm(String majorName, String abbreviation, CTDT ctdt) throws InterruptedException{
@@ -184,8 +184,14 @@ public class TermAndMajorPage {
 		}
 		return false;
 	}
-
-	public void getToastMessage() {
-		System.out.println("Toast Message: " + webDriver.findElement(By.className("toast-message")).getText());
+	
+	public List<WebElement> getErrorMessageList() {
+		List<WebElement> errorMessageList = webDriver.findElements(By.className("error"));
+		
+		return errorMessageList;
+	}
+	
+	public String getToastMessage() {
+		return webDriver.findElement(By.className("toast-message")).getText();
 	}
 }

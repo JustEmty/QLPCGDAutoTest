@@ -8,7 +8,9 @@ import pageFactory.TermAndMajorPage.CTDT;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
 public class AddMajorTestNG {
@@ -38,7 +40,7 @@ public class AddMajorTestNG {
 		termAndMajor.addMajorButtonPressed();
 		
 		termAndMajor.addDataToMajorForm(majorId, majorName, abbreviation, CTDT.DacBiet);
-		termAndMajor.getToastMessage();
+		Assert.assertEquals(termAndMajor.getToastMessage(), "Lưu thành công!");
 	}
 
 	@Test(priority = 2)
@@ -51,7 +53,7 @@ public class AddMajorTestNG {
 		
 		termAndMajor.addDataToMajorForm(majorId, majorName, abbreviation, CTDT.DacBiet);
 		
-		saveUnsuccessful();
+		saveUnsuccessful("addMajorWithoutDataFailed");
 	}
 	
 	@Test(priority = 3)
@@ -64,7 +66,7 @@ public class AddMajorTestNG {
 		
 		termAndMajor.addDataToMajorForm(majorId, majorName, abbreviation, CTDT.DacBiet);
 		
-		saveUnsuccessful();
+		saveUnsuccessful("addMajorWithSpecialCharacterFailed");
 	}
 	
 	@Test(priority = 4)
@@ -77,7 +79,7 @@ public class AddMajorTestNG {
 		
 		termAndMajor.addDataToMajorForm(majorId, majorName, abbreviation, CTDT.CTDT);
 		
-		saveUnsuccessful();
+		saveUnsuccessful("addMajorWithoutCTDTFailed");
 	}
 	
 	@AfterClass
@@ -85,10 +87,15 @@ public class AddMajorTestNG {
 		webDriver.quit();
 	}
 	
-	private void saveUnsuccessful() throws InterruptedException {
+	private void saveUnsuccessful(String testCaseName) throws InterruptedException {
 		if (termAndMajor.isErrorMessagesDisplayed()) {
+			for (WebElement errorMessage : termAndMajor.getErrorMessageList()) {
+				System.out.println(errorMessage.getText());
+			}
+			System.out.println("-----");
 			termAndMajor.closeMajorFormButtonPressed();
-			System.out.println("Lưu không thành công");
+			System.out.println("TC: " + testCaseName + " Lưu không thành công");
+			System.out.println("----------");
 		}
 	}
 }
