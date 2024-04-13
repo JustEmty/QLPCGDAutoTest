@@ -139,7 +139,7 @@ public class TermPage {
 		  // Nhấn nút Lưu
 		  nutLuu.click();
 	}
-	public void suaHocKy(String tuanBD, String nam, String tietToiDa, String lopToiDa) throws InterruptedException {
+	public void suaHocKy(String tuanBD, String tietToiDa, String lopToiDa) throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		
 		  // Nhấn nút chỉnh sửa học kỳ
@@ -165,25 +165,9 @@ public class TermPage {
 		  // Nhập tuần bắt đầu
 		  nhapTuanBatDau.sendKeys(tuanBD);
 		  Thread.sleep(2000);
-		  	
-		  // Chọn ngày bắt đầu	
-		  chonNgayBatDau.click();
-		  Thread.sleep(2000);
-		  // Chọn tháng
-		  chonThang.click();
-		  Select chon_thang = new Select(chonThang);
-		  chon_thang.selectByVisibleText("Tháng tư");
-		  Thread.sleep(5000);
-		  // Nhập năm
-		  chonNam.click();
-		  chonNam.sendKeys(nam);
-		  Thread.sleep(5000);
-		  // Chọn ngày	
-		  chonNgay.click();
-		  Thread.sleep(2000);
 		  
 		  //Chuyển sang ô nhập Tiết tối đa
-		  actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
+		  actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).perform();
 		  Thread.sleep(2000);
 		  
 		  // Nhập tiết tối đa
