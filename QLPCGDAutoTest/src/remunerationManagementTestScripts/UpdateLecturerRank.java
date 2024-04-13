@@ -32,7 +32,7 @@ public class UpdateLecturerRank {
 	}
 
 	@Test
-	public void TestCase1() throws InterruptedException {
+	public void TC1_updateLecturerRankSuccess() throws InterruptedException {
 		lecturersRankPage.capNhatCapBac();
 		String thongBaoThanhCongExpect = "Cập nhật thành công!";
 		String thongBaoThanhCongActual = webDriver.findElement(By.className("toast-message")).getText();
@@ -48,7 +48,7 @@ public class UpdateLecturerRank {
 	}
 
 	@Test
-	public void TestCase2() throws InterruptedException {
+	public void TC2_updateAllLecturerRankSuccess() throws InterruptedException {
 		lecturersRankPage.capNhatTatCaCapBac();
 		String thongBaoThanhCongExpect = "Lưu thành công!";
 		String thongBaoThanhCongActual = webDriver.findElement(By.className("toast-message")).getText();
