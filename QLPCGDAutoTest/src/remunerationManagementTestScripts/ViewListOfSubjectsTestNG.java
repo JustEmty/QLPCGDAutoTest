@@ -40,7 +40,7 @@ public class ViewListOfSubjectsTestNG {
 	}
 
 	@Test
-	public void TestCase1() throws InterruptedException {
+	public void TC1_compareTitle() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		// So sánh 2 Title Mong đợi và Thực tế
@@ -59,7 +59,7 @@ public class ViewListOfSubjectsTestNG {
 	}
 
 	@Test
-	public void TestCase2() throws InterruptedException {
+	public void TC2_scrollPage() throws InterruptedException {
 		// Chọn lọc số lượng dữ liệu hiển thị thành Tất cả
 		subjectsPage.chonSLDuLieuHienThi();
 		Thread.sleep(2000);
@@ -69,13 +69,13 @@ public class ViewListOfSubjectsTestNG {
 	}
 
 	@Test
-	public void TestCase3() throws InterruptedException {
+	public void TC3_pressTopPageButton() throws InterruptedException {
 		// Scroll page xuống theo chiều dọc và nhấn nút Trở lại đầu trang
 		subjectsPage.nhanNutVeDauTrang();
 	}
 
 	@Test
-	public void TestCase4() throws InterruptedException {
+	public void TC4_maximumOrMinimizeScreen() throws InterruptedException {
 		// Nhấn nút Full Screen
 		subjectsPage.toanVaThuManHinh();
 	}
