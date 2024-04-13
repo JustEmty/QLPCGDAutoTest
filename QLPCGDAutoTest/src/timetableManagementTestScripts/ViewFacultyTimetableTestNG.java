@@ -37,7 +37,7 @@ public class ViewFacultyTimetableTestNG {
 	}
 
 	@Test(priority = 3)
-	public void TestCase1() throws InterruptedException {
+	public void TC1_compareTitle() throws InterruptedException {
 		// Tạo biến ExpectTitle và gán dữ liệu cho nó
 		String ExpectTitle = "Phân công giảng dạy";
 
@@ -58,7 +58,7 @@ public class ViewFacultyTimetableTestNG {
 	}
 
 	@Test(priority = 2)
-	public void TestCase2() throws InterruptedException {
+	public void TC2_scollPageAndTable() throws InterruptedException {
 		// Scroll page xuống theo chiều dọc và scroll bảng phân công xuống theo chiều
 		// dọc
 		assignLecturerPage.scrollPage_ScrollTable();
@@ -66,7 +66,7 @@ public class ViewFacultyTimetableTestNG {
 	}
 
 	@Test(priority = 1)
-	public void TestCase3() throws InterruptedException {
+	public void TC3_compareQuantitiesOfData() throws InterruptedException {
 		assignLecturerPage.chonHocKy_Nganh("999", "công nghệ thông tinnnn");
 
 		// Đếm tổng số lớp có trong bảng
@@ -97,7 +97,7 @@ public class ViewFacultyTimetableTestNG {
 	}
 
 	@Test(priority = 4)
-	public void TestCase4() throws InterruptedException {
+	public void TC4_maximumOrMinimizeScreen() throws InterruptedException {
 		assignLecturerPage.toanVaThuManHinh();
 
 	}
