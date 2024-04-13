@@ -36,7 +36,7 @@ public class SearchLecturerByRankTestNG {
 	}
 
 	@Test
-	public void TestCase1() throws InterruptedException {
+	public void TC1_printOutputLecturerRank() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		// Chọn nút chọn số dữ liệu hiển thị và chọn tất cả
 		lecturersRankPage.chonSLDuLieuHienThi();
@@ -60,7 +60,7 @@ public class SearchLecturerByRankTestNG {
 	}
 
 	@Test
-	public void TestCase2() throws InterruptedException {
+	public void TC2_compareQuantitiesOfData() throws InterruptedException {
 		// Tải lại trang
 		webDriver.navigate().refresh();
 		Thread.sleep(2000);
@@ -88,7 +88,7 @@ public class SearchLecturerByRankTestNG {
 	}
 
 	@Test
-	public void TestCase3() throws InterruptedException {
+	public void TC3_searchBaseOnPagination() throws InterruptedException {
 		// Tải lại trang
 		webDriver.navigate().refresh();
 		Thread.sleep(2000);
