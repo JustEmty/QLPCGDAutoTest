@@ -34,7 +34,7 @@ public class DeleteTermTestNG {
 	}
 
 	@Test(priority = 1)
-	public void TestCase1() throws InterruptedException {
+	public void TC1_deleteTermSuccess() throws InterruptedException {
 		termPage.xoaHocKy();
 		String thongBaoThanhCongExpect = "Xóa thành công!";
 		String thongBaoThanhCongActual = webDriver.findElement(By.className("toast-message")).getText();
@@ -50,7 +50,7 @@ public class DeleteTermTestNG {
 	}
 
 	@Test(priority = 2)
-	public void TestCase2() throws InterruptedException {
+	public void TC2_deleteTermWhenPressCloseButton() throws InterruptedException {
 		termPage.huyXoaHocKy();
 	}
 
