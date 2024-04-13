@@ -41,7 +41,7 @@ public class ImportTimetableTestNG {
 	}
 
 	@Test(priority = 1)
-	public void TestCase1() throws InterruptedException {
+	public void TC1_importFail() throws InterruptedException {
 		importTKBPage.ImportTKB();
 		String thongBaoExpect = "Bạn chưa chọn học kỳ và ngành";
 		String thongBaoActual = webDriver.findElement(By.className("toast-message")).getText();
@@ -61,7 +61,7 @@ public class ImportTimetableTestNG {
 	}
 
 	@Test(priority = 2)
-	public void TestCase2() throws InterruptedException {
+	public void TC2_importSuccess() throws InterruptedException {
 		webDriver.navigate().refresh();
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		importTKBPage.chonHocKy_Nganh("120", "công nghệ thông tinnnn");
