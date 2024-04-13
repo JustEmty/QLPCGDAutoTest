@@ -38,7 +38,7 @@ public class ViewListOfLecturersByRankTestNG {
 	}
 
 	@Test
-	public void TestCase1() throws InterruptedException {
+	public void TC1_compareTitle() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		Thread.sleep(2000);
 		String ExpectTitle = "Quản lý cấp bậc giảng viên";
@@ -56,17 +56,17 @@ public class ViewListOfLecturersByRankTestNG {
 	}
 
 	@Test
-	public void TestCase2() throws InterruptedException {
+	public void TC2_scrollPage() throws InterruptedException {
 		lecturersRankPage.scroll();
 	}
 
 	@Test
-	public void TestCase3() throws InterruptedException {
+	public void TC3_pressTopPageButton() throws InterruptedException {
 		lecturersRankPage.nhanNutVeDauTrang();
 	}
 
 	@Test
-	public void TestCase4() throws InterruptedException {
+	public void TC4_maximumOrMinimizeScreen() throws InterruptedException {
 		lecturersRankPage.toanVaThuManHinh();
 	}
 
