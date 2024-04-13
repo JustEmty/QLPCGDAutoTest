@@ -35,7 +35,7 @@ public class UpdateSubjectTestNG {
 	}
 
 	@Test
-	public void TestCase1() throws InterruptedException {
+	public void TC1_updateSubjectSuccess() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		subjectsPage.capNhatMonHoc();
 		String thongBaoThanhCongExpect = "Cập nhật thành công!";
