@@ -38,7 +38,7 @@ public class SearchRenumnerationOfLectureTestNG {
 	}
 
 	@Test
-	public void TestCase1() throws InterruptedException {
+	public void TC1_printOutputRenumneration() throws InterruptedException {
 		String nd_cantimkiem = "hi"; // Nhập nội dung cần tìm kiếm vào đây
 
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -68,7 +68,7 @@ public class SearchRenumnerationOfLectureTestNG {
 	}
 
 	@Test
-	public void TestCase2() throws InterruptedException {
+	public void TC2_compareQuantitiesOfData() throws InterruptedException {
 		// Tải lại trang
 		webDriver.navigate().refresh();
 		Thread.sleep(2000);
@@ -101,7 +101,7 @@ public class SearchRenumnerationOfLectureTestNG {
 	}
 
 	@Test
-	public void TestCase3() throws InterruptedException {
+	public void TC3_searchBaseOnPagination() throws InterruptedException {
 		// Tải lại trang
 		webDriver.navigate().refresh();
 		Thread.sleep(2000);
