@@ -36,7 +36,7 @@ public class UpdateRemunerationCoefficientTestNG {
 	}
 
 	@Test
-	public void TestCase1() throws InterruptedException {
+	public void TC1_updatePriceSuccess() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		remunerationCoefficientPage.suaDonGia("1000000");
 		String thongBaoThanhCongExpect = "Lưu thành công!";
@@ -53,7 +53,7 @@ public class UpdateRemunerationCoefficientTestNG {
 	}
 
 	@Test
-	public void TestCase2() throws InterruptedException {
+	public void TC2_updateCoefficientSuccess() throws InterruptedException {
 		remunerationCoefficientPage.suaHeSo("1.5", "1.1", "1.1", "1.2");
 		String thongBaoThanhCongExpect = "Lưu thành công!";
 		String thongBaoThanhCongActual = webDriver.findElement(By.className("toast-message")).getText();
