@@ -31,7 +31,7 @@ public class LockTermTestNG {
 	}
 
 	@Test
-	public void TestCase1() throws InterruptedException {
+	public void TC1_lockTermSuccess() throws InterruptedException {
 		termPage.khoaHocKy();
 		String thongBaoThanhCongExpect = "Cập nhật trạng thái thành công!";
 		String thongBaoThanhCongActual = webDriver.findElement(By.className("toast-message")).getText();
