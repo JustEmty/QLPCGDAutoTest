@@ -33,7 +33,7 @@ public class updateUserProfileTestNG {
 	}
 
 	@Test
-	public void TestCase1() throws InterruptedException {
+	public void TC1_updateUserProfileSuccess() throws InterruptedException {
 		userProfileManagementPage.capNhatHoSo("005", "Lê Phạm Minh Tài");
 		String thongBaoThanhCongExpect = "Cập nhật thành công!";
 		String thongBaoThanhCongActual = webDriver.findElement(By.xpath("//*[@id=\"swal2-html-container\"]")).getText();
