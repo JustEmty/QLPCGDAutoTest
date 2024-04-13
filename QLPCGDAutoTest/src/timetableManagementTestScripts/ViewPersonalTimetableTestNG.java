@@ -35,7 +35,7 @@ public class ViewPersonalTimetableTestNG {
 	}
 
 	@Test
-	public void TestCase1() throws InterruptedException {
+	public void TC1_compareTitle() throws InterruptedException {
 		String ExpectTitle = "Thời khóa biểu cá nhân";
 		String ActualTitle = webDriver.getTitle().toString();
 		if (ActualTitle.contentEquals(ExpectTitle)) {
@@ -51,13 +51,13 @@ public class ViewPersonalTimetableTestNG {
 	}
 
 	@Test
-	public void TestCase2() throws InterruptedException {
+	public void TC2_maximumOrMinimizeScreen() throws InterruptedException {
 		// Nhấn nút Full Screen
 		viewPersonalTimetablePage.toanVaThuManHinh();
 	}
 
 	@Test
-	public void TestCase3() throws InterruptedException {
+	public void TC3_printInfoClasses() throws InterruptedException {
 		// Tải lại trang
 		webDriver.navigate().refresh();
 		Thread.sleep(2000);
