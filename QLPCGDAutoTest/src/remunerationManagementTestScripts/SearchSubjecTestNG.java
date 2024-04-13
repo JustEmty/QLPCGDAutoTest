@@ -38,7 +38,7 @@ public class SearchSubjecTestNG {
 	}
 
 	@Test(priority = 1)
-	public void TestCase1() throws InterruptedException {
+	public void TC1_printOutputSubject() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		// Chọn nút chọn số dữ liệu hiển thị và chọn tất cả
@@ -63,7 +63,7 @@ public class SearchSubjecTestNG {
 	}
 
 	@Test(priority = 2)
-	public void TestCase2() throws InterruptedException {
+	public void TC2_compareQuantitiesOfData() throws InterruptedException {
 		// Tải lại trang
 		webDriver.navigate().refresh();
 		Thread.sleep(2000);
@@ -93,7 +93,7 @@ public class SearchSubjecTestNG {
 	}
 
 	@Test(priority = 3)
-	public void TestCase3() throws InterruptedException {
+	public void TC3_searchBaseOnPagination() throws InterruptedException {
 		// Tải lại trang
 		webDriver.navigate().refresh();
 		Thread.sleep(2000);
