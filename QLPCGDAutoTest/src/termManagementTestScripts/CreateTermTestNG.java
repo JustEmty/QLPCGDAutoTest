@@ -31,7 +31,7 @@ public class CreateTermTestNG {
 	}
 
 	@Test(priority = 1)
-	public void TestCase1() throws InterruptedException {
+	public void TC1_addTermSuccess() throws InterruptedException {
 		termPage.themHocKy("002", "26", "2025", "7", "15");
 		String thongBaoThanhCongExpect = "Lưu thành công!";
 		String thongBaoThanhCongActual = webDriver.findElement(By.className("toast-message")).getText();
@@ -47,7 +47,7 @@ public class CreateTermTestNG {
 	}
 
 	@Test(priority = 2)
-	public void TestCase2() throws InterruptedException {
+	public void TC2_addTermWithoutData() throws InterruptedException {
 		webDriver.navigate().refresh();
 		Thread.sleep(2000);
 		termPage.themHocKy("101", null, null, null, null);
@@ -83,7 +83,7 @@ public class CreateTermTestNG {
 	}
 
 	@Test(priority = 3)
-	public void TestCase3() throws InterruptedException {
+	public void TC3_addTermFailWithExistID() throws InterruptedException {
 		termPage.themHocKy("101", "26", "2025", "7", "15");
 		String thongBaoLoiExpect = "Học kỳ này đã được tạo trong hệ thống!";
 		String thongBaoLoiActual = webDriver.findElement(By.xpath("//*[@id=\"swal2-html-container\"]")).getText();
