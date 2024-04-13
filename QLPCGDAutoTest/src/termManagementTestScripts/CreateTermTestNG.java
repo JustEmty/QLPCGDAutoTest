@@ -84,6 +84,8 @@ public class CreateTermTestNG {
 
 	@Test(priority = 3)
 	public void TC3_addTermFailWithExistID() throws InterruptedException {
+		webDriver.navigate().refresh();
+		Thread.sleep(2000);
 		termPage.themHocKy("101", "26", "2025", "7", "15");
 		String thongBaoLoiExpect = "Học kỳ này đã được tạo trong hệ thống!";
 		String thongBaoLoiActual = webDriver.findElement(By.xpath("//*[@id=\"swal2-html-container\"]")).getText();
