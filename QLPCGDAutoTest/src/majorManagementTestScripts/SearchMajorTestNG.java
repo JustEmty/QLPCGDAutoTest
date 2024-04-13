@@ -30,7 +30,7 @@ public class SearchMajorTestNG {
 		termAndMajor.moveToMajorTab();
 	}
 
-	@Test
+	@Test(priority = 1)
 	public void searchMajorSucceed() throws InterruptedException {
 		String data = "a";
 		termAndMajor.searchData(data);

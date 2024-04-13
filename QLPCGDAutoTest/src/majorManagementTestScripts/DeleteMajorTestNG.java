@@ -33,14 +33,14 @@ public class DeleteMajorTestNG {
 		termAndMajor.searchData(data);
 	}
   
-	@Test
+	@Test(priority = 1)
 	public void deleteMajorSucceed() throws InterruptedException {
 		termAndMajor.deleteMajorFormButtonPressed();
 		termAndMajor.confirmDeleteMajorFormButtonPressed();
 		Assert.assertEquals(termAndMajor.getToastMessage(), "Xóa thành công!");
 	}
 	
-	@Test
+	@Test(priority = 2)
 	public void deleteMajorFailed() throws InterruptedException {
 		termAndMajor.deleteMajorFormButtonPressed();
 		termAndMajor.cancelDeleteMajorFormButtonPressed();

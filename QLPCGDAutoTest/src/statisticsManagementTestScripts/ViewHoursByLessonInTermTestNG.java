@@ -37,12 +37,12 @@ public class ViewHoursByLessonInTermTestNG {
 		statisticsLectureHoursPage.checkViewHoursByLessonButtonClicked();
 	}
 	
-	@Test
+	@Test(priority = 3)
 	public void fullAndMinimizeScreen() throws InterruptedException {
 		statisticsLectureHoursPage.fullAndMinimizeScreenButtonClicked();
 	}
 	
-	@Test
+	@Test(priority = 2)
 	public void scrollUpAndDownPage() throws InterruptedException {
 		actions.sendKeys(Keys.ARROW_DOWN).perform();
 		Thread.sleep(2000);
@@ -50,7 +50,7 @@ public class ViewHoursByLessonInTermTestNG {
 		Thread.sleep(2000);
 	}
 	
-	@Test
+	@Test(priority = 1)
 	public void compareTitle() throws InterruptedException {
 		String expectedTitle = "Thống kê số giờ giảng viên";
 		String actualTitle = webDriver.getTitle();

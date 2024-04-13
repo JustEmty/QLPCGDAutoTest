@@ -35,7 +35,7 @@ public class UpdateMajorTestNG {
 		termAndMajor.searchData(data);
 	}
 	
-	@Test
+	@Test(priority = 1)
 	public void updateMajorSucceed() throws InterruptedException {
 		String majorName = "AutoTest";
 		String abbreviation = "AT";
@@ -47,7 +47,7 @@ public class UpdateMajorTestNG {
 		Assert.assertEquals(termAndMajor.getToastMessage(), "Cập nhật thành công!");
 	}
 	
-	@Test
+	@Test(priority = 2)
 	public void updateMajorWithoutDataFailed() throws InterruptedException {
 		String majorName = "";
 		String abbreviation = "";

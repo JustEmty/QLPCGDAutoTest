@@ -38,7 +38,7 @@ public class ViewListOfMajorTestNG {
 		termAndMajor.moveToMajorTab();
 	}
 
-	@Test
+	@Test(priority = 1)
 	public void compareTitle() throws InterruptedException {
 		String expectedTitle = "Quản lý ngành";
 		String actualTitle = webDriver.getTitle();
@@ -54,7 +54,7 @@ public class ViewListOfMajorTestNG {
 		}
 	}
 	
-	@Test
+	@Test(priority = 2)
 	public void scrollWebsite() throws InterruptedException {
 		robot.keyPress(KeyEvent.VK_PAGE_DOWN);
 		Thread.sleep(2000);
