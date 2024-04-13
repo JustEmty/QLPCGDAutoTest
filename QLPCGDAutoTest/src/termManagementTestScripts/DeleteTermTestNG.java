@@ -51,6 +51,8 @@ public class DeleteTermTestNG {
 
 	@Test(priority = 2)
 	public void TC2_deleteTermWhenPressCloseButton() throws InterruptedException {
+		webDriver.navigate().refresh();
+		Thread.sleep(2000);
 		termPage.huyXoaHocKy();
 	}
 
