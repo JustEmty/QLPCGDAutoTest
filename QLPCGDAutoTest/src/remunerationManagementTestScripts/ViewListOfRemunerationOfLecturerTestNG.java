@@ -33,7 +33,7 @@ public class ViewListOfRemunerationOfLecturerTestNG {
 	}
 
 	@Test
-	public void TestCase1() throws InterruptedException {
+	public void TC1_compareTitle() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		String ExpectTitle = "Thù lao giảng viên";
 		String ActualTitle = webDriver.getTitle().toString();
@@ -50,7 +50,7 @@ public class ViewListOfRemunerationOfLecturerTestNG {
 	}
 
 	@Test
-	public void TestCase2() throws InterruptedException {
+	public void TC2_scrollPage() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		// Tải lại trang
 		webDriver.navigate().refresh();
@@ -67,7 +67,7 @@ public class ViewListOfRemunerationOfLecturerTestNG {
 	}
 
 	@Test
-	public void TestCase3() throws InterruptedException {
+	public void TC3_pressTopPageButton() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		// Scroll page xuống theo chiều dọc và nhấn nút Trở lại đầu trang
@@ -75,7 +75,7 @@ public class ViewListOfRemunerationOfLecturerTestNG {
 	}
 
 	@Test
-	public void TestCase4() throws InterruptedException {
+	public void TC4_maximumOrMinimizeScreen() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		// Nhấn nút Full Screen
 		remunerationOfLecturerPage.toanVaThuManHinh();
