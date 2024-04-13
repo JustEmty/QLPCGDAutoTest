@@ -32,7 +32,7 @@ public class UpdateTermTestNG {
 
 	@Test(priority = 1)
 	public void TC1_updateTermSuccess() throws InterruptedException {
-		termPage.suaHocKy("26", "2025", "7", "15");
+		termPage.suaHocKy("26", "7", "15");
 		String thongBaoThanhCongExpect = "Cập nhật thành công!";
 		String thongBaoThanhCongActual = webDriver.findElement(By.className("toast-message")).getText();
 		if (thongBaoThanhCongActual.contentEquals(thongBaoThanhCongExpect)) {
@@ -48,7 +48,7 @@ public class UpdateTermTestNG {
 
 	@Test(priority = 2)
 	public void TC2_updateTermWithoutData() throws InterruptedException {
-		termPage.suaHocKy(null, null, null, null);
+		termPage.suaHocKy(null, null, null);
 		String tuanBDErrorExpect = "Bạn chưa nhập tuần bắt đầu";
 		String tietTDErrorExpect = "Bạn chưa nhập số tiết tối đa";
 		String lopTDErrorExpect = "Bạn chưa nhập số lớp tối đa";
