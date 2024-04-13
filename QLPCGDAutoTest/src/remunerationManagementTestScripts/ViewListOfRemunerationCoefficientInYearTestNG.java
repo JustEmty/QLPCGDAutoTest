@@ -35,7 +35,7 @@ public class ViewListOfRemunerationCoefficientInYearTestNG {
 	}
 
 	@Test
-	public void TestCase1() throws InterruptedException {
+	public void TC1_compareTitle() throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		String ExpectTitle = "Quản lý đơn giá & hệ số";
 		String ActualTitle = webDriver.getTitle().toString();
@@ -52,17 +52,17 @@ public class ViewListOfRemunerationCoefficientInYearTestNG {
 	}
 
 	@Test
-	public void TestCase2() throws InterruptedException {
+	public void TC2_scrollPage() throws InterruptedException {
 		remunerationCoefficientPage.scroll();
 	}
 
 	@Test
-	public void TestCase3() throws InterruptedException {
+	public void TC3_pressTopPageButton() throws InterruptedException {
 		remunerationCoefficientPage.nhanNutVeDauTrang();
 	}
 
 	@Test
-	public void TestCase4() throws InterruptedException {
+	public void TC4_maximumOrMinimizeScreen() throws InterruptedException {
 		remunerationCoefficientPage.toanVaThuManHinh();
 	}
 
