@@ -37,7 +37,7 @@ public class SearchTermTestNG {
 	}
 
 	@Test
-	public void TestCase1() throws InterruptedException {
+	public void TC1_printOutputTerm() throws InterruptedException {
 		// Chọn nút chọn số dữ liệu hiển thị và chọn tất cả
 		termPage.chonSLDuLieuHienThi();
 
@@ -57,7 +57,7 @@ public class SearchTermTestNG {
 	}
 
 	@Test
-	public void TestCase2() throws InterruptedException {
+	public void TC2_compareQuantitiesOfData() throws InterruptedException {
 		// Tải lại trang
 		webDriver.navigate().refresh();
 		Thread.sleep(2000);
@@ -85,7 +85,7 @@ public class SearchTermTestNG {
 	}
 
 	@Test
-	public void TestCase3() throws InterruptedException {
+	public void TC3_searchBaseOnPagination() throws InterruptedException {
 		// Tải lại trang
 		webDriver.navigate().refresh();
 		Thread.sleep(2000);
