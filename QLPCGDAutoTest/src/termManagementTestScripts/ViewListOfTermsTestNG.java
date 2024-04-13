@@ -37,7 +37,7 @@ public class ViewListOfTermsTestNG {
 	}
 
 	@Test
-	public void TestCase1() throws InterruptedException {
+	public void TC1_compareTitle() throws InterruptedException {
 		// Tạo biến ExpectTitle và gán dữ liệu cho nó
 		String ExpectTitle = "Quản lý học kỳ";
 
@@ -58,17 +58,17 @@ public class ViewListOfTermsTestNG {
 	}
 
 	@Test
-	public void TestCase2() throws InterruptedException {
+	public void TC2_scrollPage() throws InterruptedException {
 		termPage.scroll();
 	}
 
 	@Test
-	public void TestCase3() throws InterruptedException {
+	public void TC3_pressTopPageButton() throws InterruptedException {
 		termPage.nhanNutVeDauTrang();
 	}
 
 	@Test
-	public void TestCase4() throws InterruptedException {
+	public void TC4_maximumOrMinimizeScreen() throws InterruptedException {
 		termPage.toanVaThuManHinh();
 	}
 
