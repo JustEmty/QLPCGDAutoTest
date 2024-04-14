@@ -28,9 +28,6 @@ public class DeleteMajorTestNG {
 		
 		loginPage.loginToWebsite();
 		termAndMajor.moveToMajorTab();
-		
-		String data = "a";
-		termAndMajor.searchData(data);
 	}
   
 	@Test(priority = 1)
@@ -44,7 +41,6 @@ public class DeleteMajorTestNG {
 	public void deleteMajorFailed() throws InterruptedException {
 		termAndMajor.deleteMajorFormButtonPressed();
 		termAndMajor.cancelDeleteMajorFormButtonPressed();
-		System.out.println("Xóa không thành công!");
 	}
 	
 	@AfterTest

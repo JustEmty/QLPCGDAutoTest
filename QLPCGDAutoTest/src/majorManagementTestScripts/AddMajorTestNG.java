@@ -53,7 +53,7 @@ public class AddMajorTestNG {
 		
 		termAndMajor.addDataToMajorForm(majorId, majorName, abbreviation, CTDT.DacBiet);
 		
-		saveUnsuccessful("addMajorWithoutDataFailed");
+		printSaveUnsuccessfulMessage("addMajorWithoutDataFailed");
 	}
 	
 	@Test(priority = 3)
@@ -66,7 +66,7 @@ public class AddMajorTestNG {
 		
 		termAndMajor.addDataToMajorForm(majorId, majorName, abbreviation, CTDT.DacBiet);
 		
-		saveUnsuccessful("addMajorWithSpecialCharacterFailed");
+		printSaveUnsuccessfulMessage("addMajorWithSpecialCharacterFailed");
 	}
 	
 	@Test(priority = 4)
@@ -79,7 +79,7 @@ public class AddMajorTestNG {
 		
 		termAndMajor.addDataToMajorForm(majorId, majorName, abbreviation, CTDT.CTDT);
 		
-		saveUnsuccessful("addMajorWithoutCTDTFailed");
+		printSaveUnsuccessfulMessage("addMajorWithoutCTDTFailed");
 	}
 	
 	@AfterClass
@@ -87,15 +87,15 @@ public class AddMajorTestNG {
 		webDriver.quit();
 	}
 	
-	private void saveUnsuccessful(String testCaseName) throws InterruptedException {
+	private void printSaveUnsuccessfulMessage(String testCaseName) throws InterruptedException {
 		if (termAndMajor.isErrorMessagesDisplayed()) {
+			System.out.println("TC: " + testCaseName + " Lưu không thành công vì các lỗi sau:");
+			System.out.println("----------");
 			for (WebElement errorMessage : termAndMajor.getErrorMessageList()) {
 				System.out.println(errorMessage.getText());
 			}
 			System.out.println("-----");
 			termAndMajor.closeMajorFormButtonPressed();
-			System.out.println("TC: " + testCaseName + " Lưu không thành công");
-			System.out.println("----------");
 		}
 	}
 }

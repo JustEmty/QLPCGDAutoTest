@@ -56,7 +56,7 @@ public class UpdateMajorTestNG {
 		
 		termAndMajor.updateDataToMajorForm(majorName, abbreviation, CTDT.DacBiet);
 		
-		saveUnsuccessful("updateMajorWithoutDataFailed");
+		printSaveUnsuccessfulMessage("updateMajorWithoutDataFailed");
 	}
 	
 	@AfterTest
@@ -64,15 +64,15 @@ public class UpdateMajorTestNG {
 		webDriver.quit();
 	}
 	
-	private void saveUnsuccessful(String testCaseName) throws InterruptedException {
+	private void printSaveUnsuccessfulMessage(String testCaseName) throws InterruptedException {
 		if (termAndMajor.isErrorMessagesDisplayed()) {
+			System.out.println("TC: " + testCaseName + " Lưu không thành công vì các lỗi sau:");
+			System.out.println("----------");
 			for (WebElement errorMessage : termAndMajor.getErrorMessageList()) {
 				System.out.println(errorMessage.getText());
 			}
 			System.out.println("-----");
 			termAndMajor.closeMajorFormButtonPressed();
-			System.out.println("TC: " + testCaseName + " Lưu không thành công");
-			System.out.println("----------");
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package pageFactory;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -36,7 +37,7 @@ public class TermAndMajorPage {
 	@FindBy(xpath = "/html/body/div[3]/div/div[6]/button[1]") private WebElement confirmDeleteMajorFormButton;
 	@FindBy(xpath = "/html/body/div[3]/div/div[6]/button[3]") private WebElement cancelDeleteMajorFormButton;
 	@FindBy(xpath = "//*[@id=\"tblMajor_filter\"]/label/input") private WebElement searchField;
-	@FindBy(xpath = "//*[@id=\"tblMajor\"]") private WebElement majorDataTable;
+	@FindBy(xpath = "//*[@id=\"tblMajor\"]/tbody") private WebElement majorDataTable;
 	
 	public TermAndMajorPage(WebDriver webDriver){
 		this.webDriver = webDriver;
@@ -53,31 +54,37 @@ public class TermAndMajorPage {
 	}
 	
 	public void addMajorButtonPressed() throws InterruptedException {
+		webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		addMajorButton.click();
 		Thread.sleep(2000);
 	}
 	
 	public void closeMajorFormButtonPressed() throws InterruptedException {
+		webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		closeMajorFormButton.click();
 		Thread.sleep(2000);
 	}
 	
 	public void updateMajorFormButtonPressed() throws InterruptedException {
+		webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		updateMajorFormButton.click();
 		Thread.sleep(2000);
 	}
 	
 	public void deleteMajorFormButtonPressed() throws InterruptedException {
+		webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		deleteMajorFormButton.click();
 		Thread.sleep(2000);
 	}
 	
 	public void confirmDeleteMajorFormButtonPressed() throws InterruptedException {
+		webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		confirmDeleteMajorFormButton.click();
 		Thread.sleep(2000);
 	}
 	
 	public void cancelDeleteMajorFormButtonPressed() throws InterruptedException {
+		webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		cancelDeleteMajorFormButton.click();
 		Thread.sleep(2000);
 	}
@@ -166,7 +173,7 @@ public class TermAndMajorPage {
 		Thread.sleep(2000);
 	}
 
-	public void getMajorDataTable() {
+	public void printMajorDataTable() {
 		List<WebElement> rows = majorDataTable.findElements(By.tagName("tr"));
 		
 		for (WebElement row : rows) {
@@ -176,6 +183,10 @@ public class TermAndMajorPage {
 		    }
 		    System.out.println();
 		}
+	}
+	
+	public List<WebElement> getMajorDataTableList() {
+		return majorDataTable.findElements(By.tagName("tr"));
 	}
 	
 	public boolean isErrorMessagesDisplayed() {

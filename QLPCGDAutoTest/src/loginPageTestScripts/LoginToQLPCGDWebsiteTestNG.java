@@ -6,6 +6,9 @@ import data.DataContainer;
 import pageFactory.LoginPage;
 
 import org.testng.annotations.BeforeTest;
+
+import static org.testng.Assert.assertEquals;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
@@ -24,14 +27,8 @@ public class LoginToQLPCGDWebsiteTestNG {
 	}
 
 	@Test
-	public void loginToQLPCGDWebsiteSucceed() {
-		try {
-			loginPage.loginToWebsite();
-			System.out.println("Login Succeed!");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			System.out.println("Login Failed!");
-		}
+	public void loginToQLPCGDWebsiteSucceed() throws InterruptedException {
+		loginPage.loginToWebsite();
 	}
 	
 

@@ -5,6 +5,8 @@ import pageFactory.LoginPage;
 import pageFactory.TermAndMajorPage;
 import pageFactory.MenuTab;
 
+import static org.testng.Assert.assertEquals;
+
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
@@ -34,7 +36,6 @@ public class ViewListOfMajorTestNG {
 		robot = new Robot();
 		
 		loginPage.loginToWebsite();
-		menuTab.moveToTermAndMajorTab();
 		termAndMajor.moveToMajorTab();
 	}
 
@@ -43,15 +44,7 @@ public class ViewListOfMajorTestNG {
 		String expectedTitle = "Quản lý ngành";
 		String actualTitle = webDriver.getTitle();
 		
-		if(actualTitle.equals(expectedTitle)) {
-			System.out.println("PASS");
-			System.out.println("Expected Title: " + expectedTitle);
-			System.out.println("Actual Title: " + actualTitle);
-		}else {
-			System.out.println("Fail");
-			System.out.println("Expected Title: " + expectedTitle);
-			System.out.println("Actual Title: " + actualTitle);
-		}
+		assertEquals(actualTitle, expectedTitle);
 	}
 	
 	@Test(priority = 2)
@@ -60,6 +53,16 @@ public class ViewListOfMajorTestNG {
 		Thread.sleep(2000);
 		robot.keyPress(KeyEvent.VK_PAGE_UP);
 		Thread.sleep(2000);
+	}
+	
+	@Test(priority = 3)
+	public void printAndCompareQuantitiesDataTable() throws InterruptedException {
+		int expectedQuantitiesData = 10;
+		
+		termAndMajor.printMajorDataTable();
+		System.out.println();
+		
+		assertEquals(termAndMajor.getMajorDataTableList().size(), expectedQuantitiesData);
 	}
 	
 	@AfterTest

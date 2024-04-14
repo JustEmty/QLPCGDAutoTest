@@ -35,9 +35,7 @@ public class SearchMajorTestNG {
 		String data = "a";
 		termAndMajor.searchData(data);
 		
-		termAndMajor.getMajorDataTable();
-		
-		System.out.println("Lấy dữ liệu thành công");
+		termAndMajor.printMajorDataTable();
 	}
   
 	@AfterTest
