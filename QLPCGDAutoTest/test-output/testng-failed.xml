@@ -3,13 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="majorManagementTestScripts.UpdateMajorTestNG">
+      <class name="majorManagementTestScripts.DeleteMajorTestNG">
         <methods>
-          <include name="updateMajorSucceed"/>
-          <include name="beforeTest"/>
+          <include name="deleteMajorFailed"/>
           <include name="afterTest"/>
+          <include name="deleteMajorSucceed"/>
+          <include name="beforeTest"/>
         </methods>
-      </class> <!-- majorManagementTestScripts.UpdateMajorTestNG -->
+      </class> <!-- majorManagementTestScripts.DeleteMajorTestNG -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
