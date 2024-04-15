@@ -19,6 +19,8 @@ public class AssignmentPage {
 	@FindBy(xpath = "//*[@id=\"assignLecturerDiv\"]/div[2]/div[2]/div/button") private WebElement exportButton;
 	@FindBy(xpath = "//*[@id=\"289818\"]") private WebElement assignButton;	
 	@FindBy(xpath = "//*[@id=\"assignLecturerDiv\"]/div[2]/div[1]/div[5]/span[1]/span[1]/span/ul/li[353]/input") private WebElement sortLectureField;	
+	@FindBy(xpath = "//*[@id=\"select2-major-container\"]") private WebElement majorContainer;	
+	@FindBy(xpath = "/html/body/div[2]/div[2]/div[3]/div/section/div/div/div/div[2]/div[1]/div[2]/div/span[2]/span/span[1]/input") private WebElement majorContainerSearchField;	
 	
 	public AssignmentPage(WebDriver webDriver) {
 		this.webDriver = webDriver;
@@ -28,6 +30,19 @@ public class AssignmentPage {
 	}
 	
 	public void exportButtonsClicked() throws InterruptedException {
+		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		
+		majorContainer.click();
+		Thread.sleep(2000);
+		
+		majorContainerSearchField.sendKeys("Tất");
+		Thread.sleep(2000);
+		
+		majorContainerSearchField.sendKeys(Keys.ENTER);
+		Thread.sleep(2000);
+		
+		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		
 		exportButton.click();
 		Thread.sleep(2000);
 	}

@@ -3,14 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="majorManagementTestScripts.DeleteMajorTestNG">
+      <class name="statisticsManagementTestScripts.ViewHoursByLessonInTermTestNG">
         <methods>
-          <include name="deleteMajorFailed"/>
-          <include name="afterTest"/>
-          <include name="deleteMajorSucceed"/>
           <include name="beforeTest"/>
+          <include name="afterTest"/>
+          <include name="compareTitle"/>
+          <include name="fullAndMinimizeScreen"/>
+          <include name="scrollUpAndDownPage"/>
         </methods>
-      </class> <!-- majorManagementTestScripts.DeleteMajorTestNG -->
+      </class> <!-- statisticsManagementTestScripts.ViewHoursByLessonInTermTestNG -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

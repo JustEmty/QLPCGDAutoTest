@@ -21,6 +21,8 @@ public class StatisticsLectureHoursPage {
 	@FindBy(xpath = "//*[@id=\"select2-year-container\"]") private WebElement yearSelection;
 	@FindBy(xpath = "//*[@id=\"select2-major-container\"]") private WebElement majorSelection;
 	@FindBy(xpath = "//*[@id=\"select2-lecturerType-container\"]") private WebElement lectureTypeSelection;
+	@FindBy(xpath = "/html/body/div[2]/div[2]/div[3]/div/section/div/div/div/div[2]/div[1]/div[4]/div/span[2]/span/span[1]/input") private WebElement majorSelectionSearchField;
+	@FindBy(xpath = "/html/body/div[2]/div[2]/div[3]/div/section/div/div/div/div[2]/div[1]/div[5]/div/span[2]/span/span[1]/input") private WebElement lectureTypeSelectionSearchField;	
 	@FindBy(xpath = "/html/body/div[2]/nav/div/div/ul[2]/li/a/i") private WebElement fullAndMinimizeScreenButton;
 	@FindBy(xpath = "//*[@id=\"table-tab\"]") private WebElement tableTab;
 	@FindBy(xpath = "//*[@id=\"isLesson\"]") private WebElement checkViewHoursByLessonButton;
@@ -42,8 +44,14 @@ public class StatisticsLectureHoursPage {
 		
 		actions.click(majorSelection).perform();
 		Thread.sleep(2000);
-		actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
+		
+		majorSelectionSearchField.sendKeys("Tất");
 		Thread.sleep(2000);
+				
+		actions.sendKeys(Keys.ENTER).perform();
+		Thread.sleep(2000);
+		
+		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	}
 	
 	public void setViewHoursInYear() throws InterruptedException {
@@ -54,15 +62,25 @@ public class StatisticsLectureHoursPage {
 		actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
 		Thread.sleep(2000);
 		
-		actions.click(yearSelection).perform();
-		Thread.sleep(2000);
-		actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
-		Thread.sleep(2000);
-		
 		actions.click(majorSelection).perform();
 		Thread.sleep(2000);
-		actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
+		
+		majorSelectionSearchField.sendKeys("Tất");
 		Thread.sleep(2000);
+		
+		actions.sendKeys(Keys.ENTER).perform();
+		Thread.sleep(2000);
+		
+		lectureTypeSelection.click();
+		Thread.sleep(2000);
+		
+		lectureTypeSelectionSearchField.sendKeys("Tất");
+		Thread.sleep(2000);
+		
+		actions.sendKeys(Keys.ENTER).perform();
+		Thread.sleep(2000);
+		
+		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	}
 	
 	public void moveToTableTab() throws InterruptedException {

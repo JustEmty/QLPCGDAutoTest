@@ -34,8 +34,6 @@ public class ExportScheduleTestNG {
 	@Test
 	public void exportScheduleSucceed() throws InterruptedException {
 		assignmentPage.exportButtonsClicked();
-		
-		System.out.println("Export thời khóa biểu thành công");
 	}
 	
 	@AfterTest
