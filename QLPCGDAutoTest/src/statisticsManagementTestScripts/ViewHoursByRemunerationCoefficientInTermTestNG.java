@@ -6,9 +6,11 @@ import data.DataContainer;
 import pageFactory.HoursByRemunerationCoefficientPage;
 import pageFactory.LoginPage;
 import pageFactory.MenuTab;
-import pageFactory.StatisticsLectureHoursPage;
 
 import org.testng.annotations.BeforeTest;
+
+import static org.testng.Assert.assertEquals;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -56,13 +58,7 @@ public class ViewHoursByRemunerationCoefficientInTermTestNG {
 		String expectedTitle = "Thống kê số giờ quy đổi giảng viên";
 		String actualTitle = webDriver.getTitle();
 		
-		if(actualTitle.equals(expectedTitle)) {
-			System.out.println("PASS");
-		}else {
-			System.out.println("Fail");
-			System.out.println("Expected Title: " + expectedTitle);
-			System.out.println("Actual Title: " + actualTitle);
-		}
+		assertEquals(actualTitle, expectedTitle);
 	}
 
 	@AfterTest
