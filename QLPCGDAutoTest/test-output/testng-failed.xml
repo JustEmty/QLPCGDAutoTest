@@ -3,15 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="statisticsManagementTestScripts.ViewHoursByLessonInTermTestNG">
+      <class name="statisticsManagementTestScripts.ViewPersonalHoursInYearTestNG">
         <methods>
-          <include name="beforeTest"/>
           <include name="afterTest"/>
           <include name="compareTitle"/>
           <include name="fullAndMinimizeScreen"/>
           <include name="scrollUpAndDownPage"/>
+          <include name="beforeTest"/>
         </methods>
-      </class> <!-- statisticsManagementTestScripts.ViewHoursByLessonInTermTestNG -->
+      </class> <!-- statisticsManagementTestScripts.ViewPersonalHoursInYearTestNG -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
