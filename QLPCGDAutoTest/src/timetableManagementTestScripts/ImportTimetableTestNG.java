@@ -64,7 +64,7 @@ public class ImportTimetableTestNG {
 	public void TC2_importSuccess() throws InterruptedException {
 		webDriver.navigate().refresh();
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		importTKBPage.chonHocKy_Nganh("120", "công nghệ thông tinnnn");
+		importTKBPage.chonHocKy_Nganh("120");
 		Thread.sleep(2000);
 		importTKBPage.ImportTKB();
 		Thread.sleep(2000);
