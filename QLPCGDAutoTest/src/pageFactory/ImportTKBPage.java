@@ -44,7 +44,7 @@ public class ImportTKBPage {
 		// Chọn vào mục Import TKB
 		mucImportTKB.click();
 	}
-	public void chonHocKy_Nganh(String hocky, String nganh) throws InterruptedException {
+	public void chonHocKy_Nganh(String hocky) throws InterruptedException {
 		webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		//Chọn học kỳ
 		nutChonHocKy.click();
@@ -55,8 +55,6 @@ public class ImportTKBPage {
 		//Chọn ngành
 		nutChonNganh.click();
 		Thread.sleep(1000);
-		truongNganh.sendKeys(nganh);;
-		Thread.sleep(1000);
 		truongNganh.sendKeys(Keys.ENTER);
 	}
 	public void tiepTucImport() throws InterruptedException {
@@ -66,7 +64,7 @@ public class ImportTKBPage {
 		Thread.sleep(5000);
 		nutImportTiep.click();
 		
-		Thread.sleep(5000);
+		Thread.sleep(30000);
 		nutXacNhan.click();
 	}
 	public void ImportTKB() throws InterruptedException {
